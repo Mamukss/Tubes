@@ -42,4 +42,6 @@ public class CustomerControl {
     public int generateId() {
         return customerDAO.generateId();
     }
+    
+    //denis kontol
 } 
