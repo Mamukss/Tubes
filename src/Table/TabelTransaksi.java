@@ -12,45 +12,56 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import Model.Transaksi;
 
-public class TabelTransaksi extends AbstractTableModel {
+public class TabelTransaksi extends AbstractTableModel{
     private List<Transaksi> list;
 
     public TabelTransaksi(List<Transaksi> list) {
         this.list = list;
     }
-
+    
     @Override
-    public int getRowCount() {
+    public int getRowCount(){
         return list.size();
     }
-
+    
     @Override
-    public int getColumnCount() {
+    public int getColumnCount(){
         return 5;
     }
-
+    
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Transaksi t = list.get(rowIndex);
-        switch (columnIndex) {
-            case 0: return t.getNoResi();
-            case 1: return t.getIdKaryawan();
-            case 2: return t.getIdCustomer();
-            case 3: return t.getTanggalPesanan();
-            case 4: return t.getTotalHarga();
-            default: return null;
+    public Object getValueAt(int rowIndex, int columnIndex){
+        switch(columnIndex){
+            case 0:
+                return list.get(rowIndex).getId_pembelian();
+            case 1:
+                return list.get(rowIndex).getKaryawan().getNama_karyawan();
+            case 2:
+                return list.get(rowIndex).getCustomer().getNama_customer();
+            case 3:
+                return list.get(rowIndex).getTanggal_pesanan();
+            case 4:
+                return "Rp " + list.get(rowIndex).getTotal_harga();
+            default:
+                return null;
         }
     }
-
+    
     @Override
-    public String getColumnName(int column) {
-        switch (column) {
-            case 0: return "No Resi";
-            case 1: return "ID Karyawan";
-            case 2: return "ID Customer";
-            case 3: return "Tanggal Pesanan";
-            case 4: return "Total Harga";
-            default: return null;
+    public String getColumnName(int column){
+        switch(column){
+            case 0:
+                return "ID Transaksi";
+            case 1:
+                return "Nama Kasir";
+            case 2:
+                return "Nama Customer";
+            case 3:
+                return "Tanggal Transaksi";
+            case 4:
+                return "Total Transaksi";
+            default:
+                return null;
         }
     }
 }

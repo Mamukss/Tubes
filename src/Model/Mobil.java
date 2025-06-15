@@ -9,28 +9,36 @@ package Model;
  * @author yohan
  */
 public class Mobil extends Kendaraan {
-    private String jenisMesin;
+   private String jenis_mesin;
+    private byte[] gambar;
+    
+    public Mobil(String jenis_mesin, String id_kendaraan, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(id_kendaraan, nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jenis_mesin = jenis_mesin;
+    } //Konstruktor lengkap
+    
+    public Mobil(String jenis_mesin, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jenis_mesin = jenis_mesin;
+    } //Konstruktor tanpa id
 
-    public Mobil(String id, String nama, float harga, byte[] gambar, String jenisMesin) {
-        super(id, nama, "Mobil", harga, gambar);
-        this.jenisMesin = jenisMesin;
-    }
-
-    public String getJenisMesin() {
-        return jenisMesin;
+    //getter
+    public String getJenis_mesin() {
+        return jenis_mesin;
     }
     
-    public void setJenisMesin(String jenisMesin) {
-        this.jenisMesin = jenisMesin;
-    }
-
-    @Override
-    public String toString(){
-        return getNama();
+    //setter
+    public void setJenis_mesin(String jenis_mesin) {
+        this.jenis_mesin = jenis_mesin;
     }
 
     @Override
     public String getSpecial() {
-        return jenisMesin;
+        return jenis_mesin;
+    }
+
+    @Override
+    public String toString() {
+        return "Mobil{" + "jenis_mesin=" + jenis_mesin + '}';
     }
 }

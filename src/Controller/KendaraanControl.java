@@ -9,49 +9,46 @@ package Controller;
  * @author yohan
  */
 import DAO.KendaraanDAO;
+import interface_Control.ICRUDControl;
 import java.util.List;
 import Model.Kendaraan;
-import Model.Mobil;
-import Model.Motor;
-import Model.Truck;
 
-public class KendaraanControl {
-    private KendaraanDAO kendaraanDAO = new KendaraanDAO();
-
-    public void insertKendaraan(Kendaraan k) {
-        kendaraanDAO.insert(k);
+public abstract class KendaraanControl <T extends Kendaraan> implements ICRUDControl<T, String>{
+    protected KendaraanDAO kDao;
+    
+    public KendaraanControl(KendaraanDAO KDao) {
+        this.kDao = KDao;
+    }
+    
+    @Override
+    public void insert(T kendaraan) {
+        kendaraan.setId_kendaraan(generateId());
+        kDao.insert(kendaraan);
     }
 
-    public void updateKendaraan(Kendaraan k, String id) {
-        kendaraanDAO.update(k, id);
+    @Override
+    public void update(T kendaraan) {
+        kDao.update(kendaraan, kendaraan.getId_kendaraan());
     }
 
-    public void deleteKendaraan(String id) {
-        kendaraanDAO.delete(id);
+    @Override
+    public void delete(String id) {
+        kDao.delete(id);
     }
 
-    public List<Kendaraan> showKendaraan(String keyword) {
-        return kendaraanDAO.showData(keyword);
+    @Override
+    public String generateId() {
+        return "K" + kDao.generateId();
     }
 
-    public List<Kendaraan> showAllKendaraan() {
-        return kendaraanDAO.showDataList();
-    }
+    // Metode abstrak untuk memastikan jenis menu yang tepat
+    protected abstract boolean cekJenis(Kendaraan kendaraan);
 
-    public int generateId() {
-        return kendaraanDAO.generateId();
-    }
+    // Metode abstrak untuk mengembalikan daftar menu yang sesuai
+    public abstract List<T> showListKendaraan();
 
-    // Optional: Factory methods jika ingin membuat objek dengan cepat
-    public Mobil createMobil(String id, String nama, float harga, byte[] gambar, String jenisMesin) {
-        return new Mobil(id, nama, harga, gambar, jenisMesin);
-    }
-
-    public Motor createMotor(String id, String nama, float harga, byte[] gambar, int jumlahTak) {
-        return new Motor(id, nama, harga, gambar, jumlahTak);
-    }
-
-    public Truck createTruck(String id, String nama, float harga, byte[] gambar, String jenisRoda) {
-        return new Truck(id, nama, harga, gambar, jenisRoda);
+    // Metode untuk mencari harga berdasarkan id menu
+    public float searchHarga(String id_kendaraan) {
+        return kDao.searchHarga(id_kendaraan);
     }
 } 

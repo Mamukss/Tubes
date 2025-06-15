@@ -4,38 +4,74 @@
  */
 package Controller;
 
-/**
- *
- * @author yohan
- */
 import DAO.TransaksiDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 import java.util.List;
 import Model.Transaksi;
+import Table.TabelTransaksi;
 
-public class TransaksiControl {
-    private TransaksiDAO transaksiDAO = new TransaksiDAO();
-
-    public void insertTransaksi(Transaksi t) {
-        transaksiDAO.insert(t);
+/**
+ *
+ * @author Tok Se Ka 220711904
+ */
+public class TransaksiControl implements ICRUDControl<Transaksi, String>, IShowTableBySearch<TabelTransaksi, String> {
+    private TransaksiDAO kDao;
+    
+    public TransaksiControl(TransaksiDAO tDao) {
+        this.kDao = tDao;
+    }
+    
+    @Override
+    public String generateId() {
+        return "T" + kDao.generateId();
     }
 
-    public void updateTransaksi(Transaksi t, String noResi) {
-        transaksiDAO.update(t, noResi);
+    @Override
+    public void insert(Transaksi transaksi) {
+        transaksi.setId_pembelian(generateId());
+        kDao.insert(transaksi);
     }
 
-    public void deleteTransaksi(String noResi) {
-        transaksiDAO.delete(noResi);
+    @Override
+    public void update(Transaksi transaksi) {
+        kDao.update(transaksi, transaksi.getId_pembelian());
     }
 
-    public List<Transaksi> getTransaksiList() {
-        return transaksiDAO.showDataList();
+    @Override
+    public void delete(String id) {
+        kDao.delete(id);
     }
 
-    public List<Transaksi> searchTransaksi(String keyword) {
-        return transaksiDAO.showData(keyword);
+    @Override
+    public TabelTransaksi showTableBySearch(String search) {
+        List<Transaksi> data = kDao.showData(search);
+        return new TabelTransaksi(data);
     }
 
-    public int generateId() {
-        return transaksiDAO.generateId();
+    public void createReceipt(String id_pembelian){
+        kDao.createReceipt(id_pembelian);
     }
-} 
+    
+    
+    public void insertTotalHarga(Transaksi transaksi) {
+        kDao.updateHarga(transaksi);
+    }
+    
+    public TabelTransaksi showTableByTanggal(String tanggalMulai, String tanggalSelesai){
+        List<Transaksi> data = kDao.showDatabyTanggal(tanggalMulai, tanggalSelesai);
+        return new TabelTransaksi(data);
+    }
+    
+    public String cariMenuTerlaris(){
+        return kDao.cariNamaMenuTerlaris() + " (Terjual " + kDao.cariJumlahProdukTerlaris() +" Item)";
+    }
+    
+    public double hitungTotalOmset(){
+        return kDao.hitungTotalOmset();
+    }
+    
+    public int hitungTotalTransaksi(){
+        return kDao.hitungTotalTransaksi();
+    }
+}

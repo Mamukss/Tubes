@@ -8,14 +8,11 @@ package DAO;
  *
  * @author yohan
  */
-package dao;
-
-import java.sql.PreparedStatement;                                
+import com.mysql.jdbc.PreparedStatement;
 import Connection.DbConnection;
 import Interface_DAO.IDAO;
 import Interface_DAO.IGenerateID;
-import Interface_DAO.IShowDataList;
-import Interface_DAO.IKendaraanDAO;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -25,25 +22,30 @@ import Model.Kendaraan;
 import Model.Mobil;
 import Model.Motor;
 import Model.Truck;
+import Interface_DAO.IShowDataList;
 
-
-public class KendaraanDAO implements IDAO<Kendaraan, String>, IShowDataList<Kendaraan>, IGenerateID, IKendaraanDAO {
+public class KendaraanDAO implements IDAO<Kendaraan, String>, IShowDataList<Kendaraan>, IGenerateID {
 
     protected DbConnection dbCon = new DbConnection();
     protected Connection con;
 
     @Override
-    public void insert(Kendaraan k) {
+    public void insert(Kendaraan K) {
         con = dbCon.makeConnection();
-        String sql = "INSERT INTO kendaraan (id_kendaraan, nama, jenis, harga, gambar) VALUES (?, ?, ?, ?, ?)";
-        System.out.println("Adding Kendaraan...");
 
-        try (PreparedStatement st = (PreparedStatement) con.prepareStatement(sql)) {
-            st.setString(1, k.getIdKendaraan());
-            st.setString(2, k.getNama());
-            st.setString(3, k.getJenis());
-            st.setFloat(4, k.getHarga());
-            byte[] imageBytes = k.getGambar();
+        String sql = "INSERT INTO kendaraan (id_kendaraan, nama_kendaraan, jenis_kendaraan, harga, gambar) VALUES (?, ?, ?, ?, ?)";
+        System.out.println("Adding kendaraan...");
+
+        PreparedStatement st = null;
+        FileInputStream fis = null;
+
+        try {
+            st = (PreparedStatement) con.prepareStatement(sql);
+            st.setString(1, K.getId_kendaraan());
+            st.setString(2, K.getNama_kendaraan());
+            st.setString(3, K.getJenis_kendaraan());
+            st.setFloat(4, K.getHarga());
+            byte[] imageBytes = K.getGambar();
             if (imageBytes != null && imageBytes.length > 0) {
                 st.setBytes(5, imageBytes);
             } else {
@@ -51,128 +53,303 @@ public class KendaraanDAO implements IDAO<Kendaraan, String>, IShowDataList<Kend
             }
 
             int result = st.executeUpdate();
-            System.out.println("Added " + result + " Kendaraan");
+            System.out.println("Added " + result + " kendaraan");
+
         } catch (Exception e) {
-            System.out.println("Error adding Kendaraan...");
+            System.out.println("Error adding kendaraan...");
             e.printStackTrace();
         } finally {
-            dbCon.closeConnection();
-        }
-    }
-
-    @Override
-    public void update(Kendaraan k, String id) {
-        con = dbCon.makeConnection();
-        String sql = "UPDATE kendaraan SET nama = ?, jenis = ?, harga = ?, gambar = ? WHERE id_kendaraan = ?";
-        System.out.println("Updating Kendaraan...");
-
-        try (PreparedStatement st = (PreparedStatement) con.prepareStatement(sql)) {
-            st.setString(1, k.getNama());
-            st.setString(2, k.getJenis());
-            st.setFloat(3, k.getHarga());
-            byte[] imageBytes = k.getGambar();
-            if (imageBytes != null && imageBytes.length > 0) {
-                st.setBytes(4, imageBytes);
-            } else {
-                st.setNull(4, java.sql.Types.BLOB);
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                dbCon.closeConnection();
+            } catch (Exception ex) {
+                System.out.println("Error closing resources...");
+                ex.printStackTrace();
             }
-            st.setString(5, id);
-
-            int result = st.executeUpdate();
-            System.out.println("Updated " + result + " Kendaraan with id " + id);
-        } catch (Exception e) {
-            System.out.println("Error updating Kendaraan...");
-            e.printStackTrace();
-        } finally {
-            dbCon.closeConnection();
         }
     }
 
     @Override
-    public void delete(String id) {
+    public List<Kendaraan> showData(String search) {
         con = dbCon.makeConnection();
-        String sql = "DELETE FROM kendaraan WHERE id_kendaraan = '" + id + "'";
-        System.out.println("Deleting Kendaraan...");
 
-        try (Statement statement = con.createStatement()) {
-            int result = statement.executeUpdate(sql);
-            System.out.println("Deleted " + result + " Kendaraan with id " + id);
-        } catch (Exception e) {
-            System.out.println("Error deleting Kendaraan...");
-            e.printStackTrace();
-        }
-        dbCon.closeConnection();
-    }
-
-    @Override
-    public List<Kendaraan> showData(String keyword) {
-        con = dbCon.makeConnection();
-        String sql = "SELECT k.*, m.jenis_mesin, mo.jumlah_tak, t.jenis_roda FROM kendaraan k " +
-                     "LEFT JOIN mobil m ON k.id_kendaraan = m.id_kendaraan " +
-                     "LEFT JOIN motor mo ON k.id_kendaraan = mo.id_kendaraan " +
-                     "LEFT JOIN truck t ON k.id_kendaraan = t.id_kendaraan " +
-                     "WHERE k.id_kendaraan LIKE '%" + keyword + "%' OR k.nama LIKE '%" + keyword + "%' OR k.jenis LIKE '%" + keyword + "%'";
-        System.out.println("Searching Kendaraan...");
-
+        String sql = "SELECT kendaraan.*, motor.jumlah_tak, mobil.jenis_mesin, truck.jenis_roda FROM menu\n"
+                + "LEFT JOIN motor ON kendaraan.id_kendaraan = motor.id_kendaraan\n"
+                + "LEFT JOIN mobil ON kendaraan.id_kendaraan = mobil.id_kendaraan\n"
+                + "LEFT JOIN truck ON kendaraan.id_kendaraan = truck.id_kendaraan\n"
+                + "WHERE kendaraan.id_kendaraan LIKE '%" + search + "%' "
+                + "OR kendaraan.nama_kendaraan LIKE '%" + search + "%' "
+                + "OR kendaraan.jenis_kendaraan LIKE '%" + search + "%' ";
+        System.out.println("Searching kendaraan...");
+        Kendaraan k = null;
         List<Kendaraan> list = new ArrayList<>();
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
 
-        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
-            while (rs.next()) {
-                Kendaraan k = mapToKendaraan(rs);
-                list.add(k);
+            if (rs != null) {
+                while (rs.next()) {
+                    if (rs.getString("jenis_kendaraan").equals("Motor")) {
+                        k = new Motor(
+                                rs.getString("jumlah_tak"), //SQL ukuran
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                        
+                    } else if (rs.getString("jenis_kendaraan").equals("Mobil")){
+                        k = new Mobil(
+                                rs.getString("jenis_mesin"), //SQL catatan
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                    }else{
+                       k = new Truck(
+                                rs.getString("jenis_roda"), //SQL catatan
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                        
+                    }
+                    list.add(k);
+                }
             }
+            rs.close();
+            statement.close();
         } catch (Exception e) {
-            System.out.println("Error fetching Kendaraan data...");
-            e.printStackTrace();
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
         }
         dbCon.closeConnection();
         return list;
     }
 
     @Override
-    public List<Kendaraan> showDataList() {
-        return showData(""); // reuse dengan keyword kosong untuk ambil semua data
+    public void update(Kendaraan k, String id_kendaraan) {
+        con = dbCon.makeConnection();
+
+        String sql = "UPDATE kendaraan SET nama_kendaraan = ?, jenis_kendaraan = ?, harga = ?, gambar = ? WHERE id_kendaraan = ?";
+        System.out.println("Updating kendaraan...");
+
+        PreparedStatement st = null;
+
+        try {
+            st = (PreparedStatement) con.prepareStatement(sql);
+            st.setString(1, k.getNama_kendaraan());
+            st.setString(2, k.getJenis_kendaraan());
+            st.setFloat(3, k.getHarga());
+
+            byte[] imageBytes = k.getGambar();
+            if (imageBytes != null && imageBytes.length > 0) {
+                st.setBytes(4, imageBytes);
+            } else {
+                st.setNull(4, java.sql.Types.BLOB);
+            }
+
+            st.setString(5, id_kendaraan);
+
+            int result = st.executeUpdate();
+            System.out.println("Updated " + result + " Menu with id_kendaraan " + id_kendaraan);
+
+        } catch (Exception e) {
+            System.out.println("Error updating kendaraan...");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                dbCon.closeConnection();
+            } catch (Exception ex) {
+                System.out.println("Error closing resources...");
+                ex.printStackTrace();
+            }
+        }
     }
 
-    private Kendaraan mapToKendaraan(ResultSet rs) throws Exception {
-        String id = rs.getString("id_kendaraan");
-        String nama = rs.getString("nama");
-        String jenis = rs.getString("jenis");
-        float harga = rs.getFloat("harga");
-        byte[] gambar = rs.getBytes("gambar");
+    @Override
+    public void delete(String id_kendaraan) {
+        con = dbCon.makeConnection();
+        String sql = "DELETE FROM `kendaraan` WHERE `id_kendaraan` = '" + id_kendaraan + "'";
+        System.out.println("Deleting kendaraan...");
 
-        switch (jenis.toLowerCase()) {
-            case "mobil":
-                return new Mobil(id, nama, harga, gambar, rs.getString("jenis_mesin"));
-            case "motor":
-                return new Motor(id, nama, harga, gambar, rs.getInt("jumlah_tak"));
-            case "truck":
-                return new Truck(id, nama, harga, gambar, rs.getString("jenis_roda"));
-            default:
-                return null;
+        try {
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " kendaraan " + id_kendaraan);
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Updating kendaraan...");
+            System.out.println(e);
         }
+        dbCon.closeConnection();
     }
 
     @Override
     public int generateId() {
         con = dbCon.makeConnection();
-        String sql = "SELECT MAX(CAST(SUBSTRING(id_kendaraan, 2) AS SIGNED)) AS max_id FROM kendaraan WHERE id_kendaraan LIKE 'K%'";
+        String sql = "SELECT MAX(CAST(SUBSTRING(id_kendaraan, 2) AS SIGNED)) AS highest_number FROM kendaraan WHERE id_kendaraan LIKE 'K%';";
+        //mendapatkan nilai tertinggi dari id yang ada di database
+
+        System.out.println("Generating Id...");
         int id = 0;
 
-        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
             if (rs != null && rs.next()) {
-                id = rs.getInt("max_id") + 1;
+                if (!rs.wasNull()) {
+                    id = rs.getInt("highest_number") + 1;
+                }
             }
+
+            //memasukan id terakhir ke dalam variabel id
+            rs.close();
+            statement.close();
         } catch (Exception e) {
-            System.out.println("Error generating ID...");
-            e.printStackTrace();
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
         }
         dbCon.closeConnection();
         return id;
     }
 
-    @Override
-    public void deleteOldJenis(String data) {
-        
+    public boolean cekPerubahanJenis(String jenis_kendaraan, String id_kendaraan) {
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT  jenis_kendaraan!='"
+                + jenis_kendaraan
+                + "'"
+                + "as result"
+                + " FROM `kendaraan`"
+                + " WHERE id_kendaraan = '"
+                + id_kendaraan
+                + "';";
+        System.out.println(sql);
+        System.out.println("Checking Result...");
+        boolean result = false;
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getBoolean("result");
+                }
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+        System.out.println("The result is" + result);
+        return result;
     }
+
+    @Override
+    public List<Kendaraan> showDataList() {
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT K.*, MB.jenis_mesin, MT.jumlah_tak, TK.jenis_roda FROM kendaraan K "
+                + "LEFT JOIN mobil MB ON K.id_kendaraan = MB.id_kendaraan "
+                + "LEFT JOIN motor MB ON K.id_kendaraan = MT.id_kendaraan "
+                + "LEFT JOIN truck MB ON K.id_kendaraan = TK.id_kendaraan ";
+
+        System.out.println("Fetching Data...");
+
+        List<Kendaraan> list = new ArrayList();
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            Kendaraan data = null;
+
+            int i = 0;
+
+            if (rs != null) {
+                while (rs.next()) {
+                    if (rs.getString("jenis_kendaraan").equals("Motor")) {
+                        data = new Motor(
+                                rs.getString("jumlah_tak"), //SQL ukuran
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                        
+                    } else if (rs.getString("jenis_kendaraan").equals("Mobil")){
+                        data = new Mobil(
+                                rs.getString("jenis_mesin"), //SQL catatan
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                    }else{
+                       data = new Truck(
+                                rs.getString("jenis_roda"), //SQL catatan
+                                rs.getString("id_kendaraan"), //SQL id_menu
+                                rs.getString("nama_kendaraan"), //SQL nama_menu
+                                rs.getString("jenis_kendaraan"), //SQL jenis_menu
+                                rs.getFloat("harga"), //SQL harga
+                                rs.getBytes("gambar"));
+                        
+                    }
+                    list.add(data);
+                }
+            }
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+
+        dbCon.closeConnection();
+        return list;
+    }
+
+    public float searchHarga(String data) { // khusus mencari harga menu
+        con = dbCon.makeConnection();
+
+        String sql = "SELECT * FROM `kendaraan` WHERE id_kendaraan = '" + data + "' ";
+        System.out.println("Searching Harga kendaraan...");
+        float c = 0;
+
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    c = rs.getFloat("harga");
+                }
+            }
+
+            rs.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error Fetching data...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+        return c;
+    }
+
 }
+

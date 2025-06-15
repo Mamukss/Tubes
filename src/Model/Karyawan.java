@@ -1,44 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
-/**
- *
- * @author yohan
- */
-public class Karyawan {
-    private String idKaryawan;
-    private String namaKaryawan;
+public class Karyawan { // OK
+    private String id_karyawan;
+    private String nama_karyawan;
     private String jabatan;
     private float gaji;
     private String username;
     private String password;
 
-    public Karyawan(String idKaryawan, String namaKaryawan, String jabatan, float gaji, String username, String password) {
-        this.idKaryawan = idKaryawan;
-        this.namaKaryawan = namaKaryawan;
+    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji, String username, String password) {
+        this.id_karyawan = id_karyawan;
+        this.nama_karyawan = nama_karyawan;
         this.jabatan = jabatan;
         this.gaji = gaji;
         this.username = username;
         this.password = password;
-    }
-
-    public Karyawan(String idKaryawan, String namaKaryawan, String jabatan, float gaji) {
-        this.idKaryawan = idKaryawan;
-        this.namaKaryawan = namaKaryawan;
+    } // konstruktor lengkap
+    
+    public Karyawan(String id_karyawan, String nama_karyawan, String jabatan, float gaji) {
+        this.id_karyawan = id_karyawan;
+        this.nama_karyawan = nama_karyawan;
         this.jabatan = jabatan;
         this.gaji = gaji;
-    }
+    } // konstruktor tanpa user/pass
     
-
-    public String getIdKaryawan() {
-        return idKaryawan;
+    // getter
+    public String getId_karyawan() {
+        return id_karyawan;
     }
 
-    public String getNamaKaryawan() {
-        return namaKaryawan;
+    public String getNama_karyawan() {
+        return nama_karyawan;
     }
 
     public String getJabatan() {
@@ -56,13 +48,14 @@ public class Karyawan {
     public String getPassword() {
         return password;
     }
-
-    public void setIdKaryawan(String idKaryawan) {
-        this.idKaryawan = idKaryawan;
+    
+    // setter
+    public void setId_karyawan(String id_karyawan) {
+        this.id_karyawan = id_karyawan;
     }
 
-    public void setNamaKaryawan(String namaKaryawan) {
-        this.namaKaryawan = namaKaryawan;
+    public void setNama_karyawan(String nama_karyawan) {
+        this.nama_karyawan = nama_karyawan;
     }
 
     public void setJabatan(String jabatan) {
@@ -80,9 +73,10 @@ public class Karyawan {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     @Override
     public String toString(){
-        return getNamaKaryawan();
-    }
+        return getNama_karyawan() ;
+    } // toString untuk return nama karyawan
+    
 }

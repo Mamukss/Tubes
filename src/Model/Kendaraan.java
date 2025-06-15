@@ -9,63 +9,72 @@ package Model;
  * @author yohan
  */
 public abstract class Kendaraan {
-    protected String idKendaraan;
-    protected String nama;
-    protected String jenis;
-    protected float harga;
-    protected byte[] gambar; // untuk menyimpan BLOB
+private String id_kendaraan;
+    private String nama_kendaraan;
+    private String jenis_kendaraan;
+    private float harga;
+    private byte[] gambar;
 
-    public Kendaraan(String idKendaraan, String nama, String jenis, float harga, byte[] gambar) {
-        this.idKendaraan = idKendaraan;
-        this.nama = nama;
-        this.jenis = jenis;
+    public Kendaraan(String id_kendaraan, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        this.id_kendaraan = id_kendaraan;
+        this.nama_kendaraan = nama_kendaraan;
+        this.jenis_kendaraan = jenis_kendaraan;
         this.harga = harga;
         this.gambar = gambar;
+    } //Konstruktor lengkap
+
+    public Kendaraan(String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        this.nama_kendaraan = nama_kendaraan;
+        this.jenis_kendaraan = jenis_kendaraan;
+        this.harga = harga;
+        this.gambar = gambar;
+    } //Konstukror tanpa id
+    
+    //getter and setter
+    public String getId_kendaraan() {
+        return id_kendaraan;
     }
 
-    public String getIdKendaraan() {
-        return idKendaraan;
+    public void setId_kendaraan(String id_kendaraan) {
+        this.id_kendaraan = id_kendaraan;
     }
 
-    public String getNama() {
-        return nama;
+    public String getNama_kendaraan() {
+        return nama_kendaraan;
     }
 
-    public String getJenis() {
-        return jenis;
+    public void setNama_kendaraan(String nama_kendaraan) {
+        this.nama_kendaraan = nama_kendaraan;
+    }
+
+    public String getJenis_kendaraan() {
+        return jenis_kendaraan;
+    }
+
+    public void setJenis_kendaraan(String jenis_kendaraan) {
+        this.jenis_kendaraan = jenis_kendaraan;
     }
 
     public float getHarga() {
         return harga;
     }
 
-    public byte[] getGambar() {
-        return gambar;
-    }
-
-    public void setIdKendaraan(String idKendaraan) {
-        this.idKendaraan = idKendaraan;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public void setJenis(String jenis) {
-        this.jenis = jenis;
-    }
-
     public void setHarga(float harga) {
         this.harga = harga;
+    }
+
+    public byte[] getGambar() {
+        return gambar;
     }
 
     public void setGambar(byte[] gambar) {
         this.gambar = gambar;
     }
-
+    
     @Override
     public String toString(){
-        return getNama();
+        return getNama_kendaraan();
     }
+    
     public abstract String getSpecial();
 }

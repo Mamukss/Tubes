@@ -4,98 +4,93 @@
  */
 package DAO;
 
-/**
- *
- * @author yohan
- */
-package dao;
-
-import Connection.DbConnection;
-import Interface_DAO.IDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
+import Model.Kendaraan;
 import Model.Motor;
+import Interface_DAO.IKendaraanDAO;
+import java.util.List;
 
-public class MotorDAO implements IDAO<Motor, String> {
+public class MotorDAO extends KendaraanDAO implements IKendaraanDAO{
 
-    protected DbConnection dbCon = new DbConnection();
-    protected Connection con;
-
-    @Override
-    public void insert(Motor m) {
+    public void insert(Motor mt) {
+        super.insert(mt);
+        insertNewJenis(mt);
+    }
+ 
+    public void insertNewJenis(Motor mt) {
         con = dbCon.makeConnection();
-        String sql = "INSERT INTO motor (id_kendaraan, jumlah_tak) VALUES (?, ?)";
 
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, m.getIdKendaraan());
-            ps.setInt(2, m.getJumlahTak());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error inserting Motor: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
+        String sql = 
+                "INSERT INTO `motor`(`id_kendaraan`, `jumlah_tak`) VALUES ('"
+                + mt.getId_kendaraan()
+                + "','"
+                + mt.getSpecial()
+                + "')";
+
+        System.out.println("Adding Kendaraan...");
+
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Added " + result + " Kendaraan");
+            statement.close();
+        }catch (Exception e){
+            System.out.println("Error adding Kendaraan...");
+            System.out.println(e);
         }
+        dbCon.closeConnection();  
     }
 
     @Override
-    public void update(Motor m, String id) {
+    public void deleteOldJenis(String id_kendaraan) {
         con = dbCon.makeConnection();
-        String sql = "UPDATE motor SET jumlah_tak=? WHERE id_kendaraan=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, m.getJumlahTak());
-            ps.setString(2, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error updating Motor: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
-        }
-    }
-
-    @Override
-    public void delete(String id) {
-        con = dbCon.makeConnection();
-        String sql = "DELETE FROM motor WHERE id_kendaraan=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error deleting Motor: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
-        }
-    }
-
-    @Override
-    public List<Motor> showData(String keyword) {
-        con = dbCon.makeConnection();
-        String sql = "SELECT k.*, mo.jumlah_tak FROM kendaraan k JOIN motor mo ON k.id_kendaraan = mo.id_kendaraan WHERE k.nama LIKE ?";
-        List<Motor> list = new ArrayList<>();
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, "%" + keyword + "%");
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Motor m = new Motor(
-                    rs.getString("id_kendaraan"),
-                    rs.getString("nama"),
-                    rs.getFloat("harga"),
-                    rs.getBytes("gambar"),
-                    rs.getInt("jumlah_tak")
-                );
-                list.add(m);
-            }
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Error fetching Motor: " + e.getMessage());
+        String sql = "DELETE FROM `Mobil` WHERE `id_kendaraan` = '"+id_kendaraan+"'";
+        System.out.println("Deleting Motor...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " kendaraan " + id_kendaraan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating kendaraan...");
+            System.out.println(e);
         }
         dbCon.closeConnection();
-        return list;
+    }
+    
+    public void updateJenis (Motor mt, String id_kendaraan){
+        con = dbCon.makeConnection();
+        
+        String sql = "UPDATE `"
+                + mt.getJenis_kendaraan()
+                + "` SET `jumlah_tak`='"
+                + mt.getJumlah_tak()
+                + "' WHERE `motor`.id_kendaraan = '"
+                + id_kendaraan
+                + "'";
+        System.out.println("Updating Jenis kendaraan...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " kendaraan" + id_kendaraan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating kendaraan...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+    }
+    
+    public void update(Kendaraan k, String id_kendaraan, String jumlah_tak) {
+        Motor mt = new Motor(jumlah_tak, k.getId_kendaraan(), k.getNama_kendaraan(), k.getJenis_kendaraan(), k.getHarga(), k.getGambar());
+        if(cekPerubahanJenis("Motor",id_kendaraan)){
+            deleteOldJenis(id_kendaraan);
+            insertNewJenis(mt);
+        }else{
+            updateJenis((Motor) k, id_kendaraan);
+        }
+        super.update(k, id_kendaraan);
     }
 } 

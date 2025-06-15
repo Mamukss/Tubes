@@ -8,34 +8,61 @@ package Controller;
  *
  * @author yohan
  */
-import DAO.KendaraanDAO;
 import DAO.MobilDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
+import java.util.ArrayList;
 import java.util.List;
 import Model.Mobil;
+import Model.Kendaraan;
+import Table.TabelMobil;
 
-public class MobilControl {
-    private KendaraanDAO kendaraanDAO = new KendaraanDAO();
-    private MobilDAO motorDAO = new MobilDAO();
 
-    public void insertMobil(Mobil m) {
-        int idNumber = kendaraanDAO.generateId();
-        String id = "M" + idNumber;
-        m.setIdKendaraan(id);
-        kendaraanDAO.insert(m);
-        motorDAO.insert(m);
+public class MobilControl extends KendaraanControl<Mobil> implements ICRUDControl<Mobil, String>, IShowTableBySearch<TabelMobil, String>{
+    private MobilDAO mbDao;
+    
+    public MobilControl(MobilDAO mDao) {
+        super(mDao);
+        this.mbDao = mDao; // Inisialisasi mkDao
+    }
+    
+    @Override
+    protected boolean cekJenis(Kendaraan kendaraan) {
+        return kendaraan instanceof Mobil;
     }
 
-    public void updateMobil(Mobil m, String id) {
-        kendaraanDAO.update(m, id);
-        motorDAO.update(m, id);
+    public void insert(Mobil mb) {
+        mb.setId_kendaraan(generateId());
+        mbDao.insert(mb);  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public void deleteMobil(String id) {
-        motorDAO.delete(id);
-        kendaraanDAO.delete(id);
+    @Override
+    public void update(Mobil mb) {
+        mbDao.update(mb, mb.getId_kendaraan(), mb.getJenis_mesin());  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public List<Mobil> getMobilList(String keyword) {
-        return motorDAO.showData(keyword);
+    @Override
+    public TabelMobil showTableBySearch(String search) {
+        List<Kendaraan> data = mbDao.showData(search);
+        List<Mobil> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (kendaraan.getJenis_kendaraan().equals("Mobil") && cekJenis(kendaraan)) {
+                temp.add((Mobil) kendaraan);
+                System.out.println("Adding Mobil");
+            }
+        }
+        return new TabelMobil(temp);
+    }
+
+    
+    public List<Mobil> showListKendaraan() {
+        List<Kendaraan> data = mbDao.showDataList();
+        List<Mobil> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (cekJenis(kendaraan)) {
+                temp.add((Mobil) kendaraan);
+            }
+        }
+        return temp;
     }
 }

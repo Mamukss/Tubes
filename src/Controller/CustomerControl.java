@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
-
+import DAO.CustomerDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
+import java.util.List;
+import Model.Customer;
+import Table.TabelCustomer; 
 /**
  *
  * @author yohan
@@ -11,37 +16,50 @@ package Controller;
 import DAO.CustomerDAO;
 import java.util.List;
 import Model.Customer;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
 
-public class CustomerControl {
-    private CustomerDAO customerDAO = new CustomerDAO();
+public class CustomerControl implements ICRUDControl<Customer, String>, IShowTableBySearch<TabelCustomer, String> {
+    private CustomerDAO pDao;
 
-    public void insertCustomer(Customer c) {
-        customerDAO.insert(c);
+    public CustomerControl(CustomerDAO pDao) {
+        this.pDao = pDao;
     }
 
-    public void updateCustomer(Customer c, String id) {
-        customerDAO.update(c, id);
+    @Override
+    public void insert(Customer customer) {
+        customer.setId_customer(generateId());
+        pDao.insert(customer);
     }
 
-    public void deleteCustomer(String id) {
-        customerDAO.delete(id);
+    @Override
+    public void update(Customer customer)  {
+        pDao.update(customer, customer.getId_customer());
     }
 
-    public List<Customer> getCustomerList() {
-        return customerDAO.showDataList();
+    @Override
+    public void delete(String id) {
+        pDao.delete(id);
     }
 
-    public List<Customer> searchCustomer(String keyword) {
-        return customerDAO.showData(keyword);
+    @Override
+    public String generateId() {
+        return "C-" + pDao.generateId();
     }
 
-    public Customer searchExact(String keyword) {
-        return customerDAO.search(keyword);
+    @Override
+    public TabelCustomer showTableBySearch(String search) {
+        List<Customer> data = pDao.showData(search);
+        return new TabelCustomer(data);
     }
 
-    public int generateId() {
-        return customerDAO.generateId();
+    public Customer searchDataPelanggan(String id) {
+        return pDao.search(id);
     }
     
-    //denis kontol
+    public List<Customer> showListPelanggan(){
+        List<Customer> dataCustomer = pDao.showDataList();
+        return dataCustomer;
+    }
+
 } 

@@ -5,61 +5,104 @@
 package Model;
 
 import java.util.Date;
+import Model.Karyawan;
 
 public class Transaksi {
-    private String noResi;
-    private String idKaryawan;
-    private String idCustomer;
-    private Date tanggalPesanan;
-    private float totalHarga;
+    private String id_pembelian;      // SQL : id_pembelian;
+    private String id_karyawan;     // SQL : id_karyawan;
+    private String id_customer;    // SQL : id_customer;
+    private String tanggal_pesanan; // SQL : tanggal_pesanan;
+    private float total_harga;      // SQL : total_harga;
+    private Customer customer;
+    private Karyawan karyawan;
 
-    public Transaksi(String noResi, String idKaryawan, String idCustomer, Date tanggalPesanan, float totalHarga) {
-        this.noResi = noResi;
-        this.idKaryawan = idKaryawan;
-        this.idCustomer = idCustomer;
-        this.tanggalPesanan = tanggalPesanan;
-        this.totalHarga = totalHarga;
+    public Transaksi(String id_pembelian, String id_karyawan, String id_customer, String tanggal_pesanan, float total_harga) {
+        this.id_pembelian = id_pembelian;
+        this.id_karyawan = id_karyawan;
+        this.id_customer = id_customer;
+        this.tanggal_pesanan = tanggal_pesanan;
+        this.total_harga = total_harga;
+    } // konstruktor lengkap
+
+    public Transaksi(String id_karyawan, String id_customer, String tanggal_pesanan, float total_harga) {
+        this.id_karyawan = id_karyawan;
+        this.id_customer = id_customer;
+        this.tanggal_pesanan = tanggal_pesanan;
+        this.total_harga = total_harga;
+    } // konstuktor tanpa id_pembelian
+
+    public Transaksi(String id_customer, String tanggal_pesanan, float total_harga) {
+        this.id_customer = id_customer;
+        this.tanggal_pesanan = tanggal_pesanan;
+        this.total_harga = total_harga;
+    } // konstruktor tanpa id_pembelian dan id_karyawan
+
+    public Transaksi(String id_pembelian, String id_karyawan, String id_customer, String tanggal_pesanan, float total_harga, 
+            Karyawan k, Customer c) {
+        this.id_pembelian = id_pembelian;
+        this.id_karyawan = id_karyawan;
+        this.id_customer = id_customer;
+        this.tanggal_pesanan = tanggal_pesanan;
+        this.total_harga = total_harga;
+        this.karyawan = k;
+        this.customer = c;     
+    } // konstruktor untuk show Table
+
+    // getter
+    public String getId_pembelian() {
+        return id_pembelian;
     }
 
-    public String getNoResi() {
-        return noResi;
+    public String getId_karyawan() {
+        return id_karyawan;
     }
 
-    public String getIdKaryawan() {
-        return idKaryawan;
+    public String getId_customer() {
+        return id_customer;
     }
 
-    public String getIdCustomer() {
-        return idCustomer;
+    public String getTanggal_pesanan() {
+        return tanggal_pesanan;
     }
 
-    public Date getTanggalPesanan() {
-        return tanggalPesanan;
+    public float getTotal_harga() {
+        return total_harga;
+    }
+    
+    public Karyawan getKaryawan(){
+        return karyawan;
+    }
+    
+    public Customer getCustomer(){
+        return customer;
     }
 
-    public float getTotalHarga() {
-        return totalHarga;
+    // setter
+    public void setId_pembelian(String id_pembelian) {
+        this.id_pembelian = id_pembelian;
     }
 
-    public void setNoResi(String noResi) {
-        this.noResi = noResi;
+    public void setId_karyawan(String id_karyawan) {
+        this.id_karyawan = id_karyawan;
     }
 
-    public void setIdKaryawan(String idKaryawan) {
-        this.idKaryawan = idKaryawan;
+    public void setId_customer(String id_customer) {
+        this.id_customer = id_customer;
     }
 
-    public void setIdCustomer(String idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setTanggal_pesanan(String tanggal_pesanan) {
+        this.tanggal_pesanan = tanggal_pesanan;
     }
 
-    public void setTanggalPesanan(Date tanggalPesanan) {
-        this.tanggalPesanan = tanggalPesanan;
+    public void setTotal_harga(float total_harga) {
+        this.total_harga = total_harga;
     }
 
-    public void setTotalHarga(float totalHarga) {
-        this.totalHarga = totalHarga;
+    @Override
+    public String toString() {
+        return "Transaksi{" + "id_pembelian=" + id_pembelian + ", id_karyawan=" + id_karyawan + ", id_customer=" + id_customer + ", tanggal_pesanan=" + tanggal_pesanan + ", total_harga=" + total_harga + '}';
     }
-
     
 }
+    
+    

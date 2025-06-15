@@ -4,38 +4,64 @@
  */
 package Controller;
 
-/**
- *
- * @author yohan
- */
-import DAO.KendaraanDAO;
+
 import DAO.TruckDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
+import java.util.ArrayList;
 import java.util.List;
 import Model.Truck;
+import Model.Kendaraan;
+import Table.TabelTruck;
 
-public class TruckControl {
-    private KendaraanDAO kendaraanDAO = new KendaraanDAO();
-    private TruckDAO motorDAO = new TruckDAO();
 
-    public void insertTruck(Truck m) {
-        int idNumber = kendaraanDAO.generateId();
-        String id = "T" + idNumber;
-        m.setIdKendaraan(id);
-        kendaraanDAO.insert(m);
-        motorDAO.insert(m);
+public class TruckControl extends KendaraanControl<Truck> implements ICRUDControl<Truck, String>, IShowTableBySearch<TabelTruck, String>{
+    private TruckDAO tkDao;
+    
+    public TruckControl(TruckDAO tDao) {
+        super(tDao);
+        this.tkDao = tDao; // Inisialisasi mkDao
+    }
+    
+    @Override
+    protected boolean cekJenis(Kendaraan kendaraan) {
+        return kendaraan instanceof Truck;
     }
 
-    public void updateTruck(Truck m, String id) {
-        kendaraanDAO.update(m, id);
-        motorDAO.update(m, id);
+    public void insert(Truck tk) {
+        tk.setId_kendaraan(generateId());
+        tkDao.insert(tk);  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public void deleteTruck(String id) {
-        motorDAO.delete(id);
-        kendaraanDAO.delete(id);
+    @Override
+    public void update(Truck tk) {
+        tkDao.update(tk, tk.getId_kendaraan(), tk.getJenis_roda());  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public List<Truck> getTruckList(String keyword) {
-        return motorDAO.showData(keyword);
+    @Override
+    public TabelTruck showTableBySearch(String search) {
+        List<Kendaraan> data = tkDao.showData(search);
+        List<Truck> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (kendaraan.getJenis_kendaraan().equals("Truck") && cekJenis(kendaraan)) {
+                temp.add((Truck) kendaraan);
+                System.out.println("Adding Truck");
+            }
+        }
+        return new TabelTruck(temp);
+    }
+
+    
+    public List<Truck> showListKendaraan() {
+        List<Kendaraan> data = tkDao.showDataList();
+        List<Truck> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (cekJenis(kendaraan)) {
+                temp.add((Truck) kendaraan);
+            }
+        }
+        return temp;
     }
 }
+
+

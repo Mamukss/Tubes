@@ -9,25 +9,36 @@ package Model;
  * @author yohan
  */
 public class Truck extends Kendaraan {
-    private String tipeRoda;
+   private String jenis_roda;
+    private byte[] gambar;
+    
+    public Truck(String jenis_roda, String id_kendaraan, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(id_kendaraan, nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jenis_roda = jenis_roda;
+    } //Konstruktor lengkap
+    
+    public Truck(String jenis_roda, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jenis_roda = jenis_roda;
+    } //Konstruktor tanpa id
 
-    public Truck(String id, String nama, float harga, byte[] gambar, String tipeRoda) {
-        super(id, nama, "Truck", harga, gambar);
-        this.tipeRoda = tipeRoda;
+    //getter
+    public String getJenis_roda() {
+        return jenis_roda;
     }
-
-    public String getJenisRoda() {
-        return tipeRoda;
-    }
-
-    public void setJumlahBerat(String tipeRoda) {
-        this.tipeRoda = tipeRoda;
+    
+    //setter
+    public void setJenis_roda(String jenis_roda) {
+        this.jenis_roda = jenis_roda;
     }
 
     @Override
     public String getSpecial() {
-        return tipeRoda;
+        return jenis_roda;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Truck{" + "jenis_roda=" + jenis_roda + '}';
+    }
 }

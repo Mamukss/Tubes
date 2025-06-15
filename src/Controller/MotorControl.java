@@ -4,39 +4,63 @@
  */
 package Controller;
 
-/**
- *
- * @author yohan
- */
-import DAO.KendaraanDAO;
 import DAO.MotorDAO;
+import interface_Control.ICRUDControl;
+import interface_Control.IShowTableBySearch;
+import java.util.ArrayList;
 import java.util.List;
 import Model.Motor;
+import Model.Kendaraan;
+import Table.TabelMotor;
 
-public class MotorControl {
-    private KendaraanDAO kendaraanDAO = new KendaraanDAO();
-    private MotorDAO motorDAO = new MotorDAO();
 
-    public void insertMotor(Motor m) {
-        int idNumber = kendaraanDAO.generateId();
-        String id = "R" + idNumber;
-        m.setIdKendaraan(id);
-        kendaraanDAO.insert(m);
-        motorDAO.insert(m);
+public class MotorControl extends KendaraanControl<Motor> implements ICRUDControl<Motor, String>, IShowTableBySearch<TabelMotor, String>{
+    private MotorDAO mtDao;
+    
+    public MotorControl(MotorDAO mDao) {
+        super(mDao);
+        this.mtDao = mDao; // Inisialisasi mkDao
+    }
+    
+    @Override
+    protected boolean cekJenis(Kendaraan kendaraan) {
+        return kendaraan instanceof Motor;
     }
 
-    public void updateMotor(Motor m, String id) {
-        kendaraanDAO.update(m, id);
-        motorDAO.update(m, id);
+    public void insert(Motor mt) {
+        mt.setId_kendaraan(generateId());
+        mtDao.insert(mt);  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public void deleteMotor(String id) {
-        motorDAO.delete(id);
-        kendaraanDAO.delete(id);
+    @Override
+    public void update(Motor mt) {
+        mtDao.update(mt, mt.getId_kendaraan(), mt.getJumlah_tak());  // Tidak perlu casting, karena mkDao sudah bertipe MakananDAO
     }
 
-    public List<Motor> getMotorList(String keyword) {
-        return motorDAO.showData(keyword);
+    @Override
+    public TabelMotor showTableBySearch(String search) {
+        List<Kendaraan> data = mtDao.showData(search);
+        List<Motor> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (kendaraan.getJenis_kendaraan().equals("Motor") && cekJenis(kendaraan)) {
+                temp.add((Motor) kendaraan);
+                System.out.println("Adding Motor");
+            }
+        }
+        return new TabelMotor(temp);
+    }
+
+    
+    public List<Motor> showListKendaraan() {
+        List<Kendaraan> data = mtDao.showDataList();
+        List<Motor> temp = new ArrayList<>();
+        for (Kendaraan kendaraan : data) {
+            if (cekJenis(kendaraan)) {
+                temp.add((Motor) kendaraan);
+            }
+        }
+        return temp;
     }
 }
+
 

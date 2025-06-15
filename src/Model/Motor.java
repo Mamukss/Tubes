@@ -9,26 +9,37 @@ package Model;
  * @author yohan
  */
 public class Motor extends Kendaraan {
-    private int jumlahTak;
+   private String jumlah_tak;
+    private byte[] gambar;
+    
+    public Motor(String jumlah_tak, String id_kendaraan, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(id_kendaraan, nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jumlah_tak = jumlah_tak;
+    } //Konstruktor lengkap
+    
+    public Motor(String jumlah_tak, String nama_kendaraan, String jenis_kendaraan, float harga,  byte[] gambar) {
+        super(nama_kendaraan, jenis_kendaraan, harga, gambar);
+        this.jumlah_tak = jumlah_tak;
+    } //Konstruktor tanpa id
 
-    public Motor(String id, String nama, float harga, byte[] gambar, int jumlahTak) {
-        super(id, nama, "Motor", harga, gambar);
-        this.jumlahTak = jumlahTak;
+    //getter
+    public String getJumlah_tak() {
+        return jumlah_tak;
     }
-
+    
+    //setter
+    public void setJumlah_tak(String jumlah_tak) {
+        this.jumlah_tak = jumlah_tak;
+    }
 
     @Override
     public String getSpecial() {
-        return jumlahTak + " Tak";
+        return jumlah_tak;
     }
 
-    public int getJumlahTak() {
-        return jumlahTak;
+    @Override
+    public String toString() {
+        return "Motor{" + "jumlah_tak=" + jumlah_tak + '}';
     }
-
-    public void setJumlahTak(int jumlahTak) {
-        this.jumlahTak = jumlahTak;
-    }
-
    
 }

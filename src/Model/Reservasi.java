@@ -6,81 +6,125 @@ package Model;
 import java.util.Date;
 
 public class Reservasi {
-    private String idReservasi;
-    private String idKaryawan;
-    private String idCustomer;
-    private Date tanggalReservasi;
-    private String jenisReservasi;
-    private String paketReservasi;
-    private float totalHarga;
+    private String id_reservasi; // SQL : id_reservasi
+    private String id_customer; // SQL : id_customer
+    private String id_karyawan;
+    private String tanggal_reservasi; // SQL : tanggal_reservasi
+    private String jenis_reservasi; // SQL : jenis_reservasi
+    private String paket_reservasi; // SQL : paket_reservasi
+    private float total_harga; // SQL : total_harga
+    private Customer customer;
+    
+    
+    public Reservasi(String id_reservasi, String id_customer, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Customer customer) {
+        this.id_reservasi = id_reservasi;
+        this.id_customer = id_customer;
+        this.tanggal_reservasi = tanggal_reservasi;
+        this.jenis_reservasi = jenis_reservasi;
+        this.paket_reservasi = paket_reservasi;
+        this.total_harga = total_harga;
+        this.customer = customer;
+    } // konstruktor lengkap
+    
+    public Reservasi(String id_reservasi, String id_karyawan,String id_customer, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Customer customer) {
+        this.id_reservasi = id_reservasi;
+        this.id_customer = id_customer;
+        this.tanggal_reservasi = tanggal_reservasi;
+        this.jenis_reservasi = jenis_reservasi;
+        this.paket_reservasi = paket_reservasi;
+        this.total_harga = total_harga;
+        this.customer = customer;
+    }
+    public Reservasi(String id_customer, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga, Customer customer) {
+        this.id_customer = id_customer;
+        this.tanggal_reservasi = tanggal_reservasi;
+        this.jenis_reservasi = jenis_reservasi;
+        this.paket_reservasi = paket_reservasi;
+        this.total_harga = total_harga;
+        this.customer = customer;
+    } // konstruktor tanpa id_reservasi
 
-    public Reservasi(String idReservasi, String idKaryawan, String idCustomer, Date tanggalReservasi,
-                     String jenisReservasi, String paketReservasi, float totalHarga) {
-        this.idReservasi = idReservasi;
-        this.idKaryawan = idKaryawan;
-        this.idCustomer = idCustomer;
-        this.tanggalReservasi = tanggalReservasi;
-        this.jenisReservasi = jenisReservasi;
-        this.paketReservasi = paketReservasi;
-        this.totalHarga = totalHarga;
+    public Reservasi(String id_karyawan, String id_customer, String tanggal_reservasi, String jenis_reservasi, String paket_reservasi, float total_harga) {
+        this.id_karyawan = id_karyawan;
+        this.id_customer = id_customer;
+        this.tanggal_reservasi = tanggal_reservasi;
+        this.jenis_reservasi = jenis_reservasi;
+        this.paket_reservasi = paket_reservasi;
+        this.total_harga = total_harga;
+    } 
+
+    // getter
+    public String getId_reservasi() {
+        return id_reservasi;
     }
 
-    public String getIdReservasi() {
-        return idReservasi;
+    public String getId_customer() {
+        return id_customer;
+    }
+    
+    public String getId_karyawan() {
+        return id_karyawan;
+    }
+    
+    public String getTanggal_reservasi() {
+        return tanggal_reservasi;
     }
 
-    public String getIdKaryawan() {
-        return idKaryawan;
+    public String getJenis_reservasi() {
+        return jenis_reservasi;
     }
 
-    public String getIdCustomer() {
-        return idCustomer;
+    public String getPaket_reservasi() {
+        return paket_reservasi;
     }
 
-    public Date getTanggalReservasi() {
-        return tanggalReservasi;
+    public float getTotal_harga() {
+        return total_harga;
     }
 
-    public String getJenisReservasi() {
-        return jenisReservasi;
+    public Customer getCustomer() {
+        return customer;
+    }
+    
+    // setter
+    public void setId_reservasi(String id_reservasi) {
+        this.id_reservasi = id_reservasi;
     }
 
-    public String getPaketReservasi() {
-        return paketReservasi;
+    public void setId_customer(String id_customer) {
+        this.id_customer = id_customer;
+    }
+    
+    public void setId_karyawan(String id_karyawan) {
+        this.id_karyawan = id_karyawan;
+    }
+    
+    public void setTanggal_reservasi(String tanggal_reservasi) {
+        this.tanggal_reservasi = tanggal_reservasi;
     }
 
-    public float getTotalHarga() {
-        return totalHarga;
+    public void setJenis_reservasi(String jenis_reservasi) {
+        this.jenis_reservasi = jenis_reservasi;
     }
 
-    public void setIdReservasi(String idReservasi) {
-        this.idReservasi = idReservasi;
+    public void setPaket_reservasi(String paket_reservasi) {
+        this.paket_reservasi = paket_reservasi;
     }
 
-    public void setIdKaryawan(String idKaryawan) {
-        this.idKaryawan = idKaryawan;
+    public void setTotal_harga(float total_harga) {
+        this.total_harga = total_harga;
     }
 
-    public void setIdCustomer(String idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-
-    public void setTanggalReservasi(Date tanggalReservasi) {
-        this.tanggalReservasi = tanggalReservasi;
-    }
-
-    public void setJenisReservasi(String jenisReservasi) {
-        this.jenisReservasi = jenisReservasi;
-    }
-
-    public void setPaketReservasi(String paketReservasi) {
-        this.paketReservasi = paketReservasi;
-    }
-
-    public void setTotalHarga(float totalHarga) {
-        this.totalHarga = totalHarga;
-    }
-
+    
+    @Override
+    public String toString() {
+        return "Reservasi{" + "id_reservasi=" + id_reservasi + ", id_customer=" + id_customer + ", tanggal_reservasi=" + tanggal_reservasi + ", jenis_reservasi=" + jenis_reservasi + ", paket_reservasi=" + paket_reservasi + ", total_harga=" + total_harga + '}';
+    } // toString menampilkan seluruh variabel
+    
     
 }
+
 

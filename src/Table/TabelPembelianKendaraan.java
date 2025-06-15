@@ -33,9 +33,9 @@ public class TabelPembelianKendaraan extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         PembelianKendaraan p = list.get(rowIndex);
         switch (columnIndex) {
-            case 0: return p.getNoResi();
-            case 1: return p.getIdCustomer();
-            case 2: return p.getIdKendaraan();
+            case 0: return p.getId_pembelian();
+            case 1: return p.getId_customer();
+            case 2: return p.getId_kendaraan();
             case 3: return p.getJumlah();
             case 4: return p.getTambahan();
             case 5: return p.getMetodePembayaran();
@@ -47,7 +47,7 @@ public class TabelPembelianKendaraan extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch (column) {
-            case 0: return "No Resi";
+            case 0: return "id_pembelian";
             case 1: return "ID Customer";
             case 2: return "ID Kendaraan";
             case 3: return "Jumlah";

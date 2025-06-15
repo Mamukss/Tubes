@@ -4,99 +4,94 @@
  */
 package DAO;
 
-/**
- *
- * @author yohan
- */
-package dao;
-
-import Connection.DbConnection;
-import Interface_DAO.IDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
+import Model.Kendaraan;
 import Model.Truck;
+import Interface_DAO.IKendaraanDAO;
+import java.util.List;
 
-public class TruckDAO implements IDAO<Truck, String> {
+public class TruckDAO extends KendaraanDAO implements IKendaraanDAO{
 
-    protected DbConnection dbCon = new DbConnection();
-    protected Connection con;
-
-    @Override
-    public void insert(Truck t) {
+    public void insert(Truck tk) {
+        super.insert(tk);
+        insertNewJenis(tk);
+    }
+ 
+    public void insertNewJenis(Truck tk) {
         con = dbCon.makeConnection();
-        String sql = "INSERT INTO truck (id_kendaraan, jenis_roda) VALUES (?, ?)";
 
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, t.getIdKendaraan());
-            ps.setString(2, t.getJenisRoda());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error inserting Truck: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
+        String sql = 
+                "INSERT INTO `truck`(`id_kendaraan`, `jenis_roda`) VALUES ('"
+                + tk.getId_kendaraan()
+                + "','"
+                + tk.getSpecial()
+                + "')";
+
+        System.out.println("Adding Kendaraan...");
+
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Added " + result + " Kendaraan");
+            statement.close();
+        }catch (Exception e){
+            System.out.println("Error adding Kendaraan...");
+            System.out.println(e);
         }
+        dbCon.closeConnection();  
     }
 
     @Override
-    public void update(Truck t, String id) {
+    public void deleteOldJenis(String id_kendaraan) {
         con = dbCon.makeConnection();
-        String sql = "UPDATE truck SET jenis_roda=? WHERE id_kendaraan=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, t.getJenisRoda());
-            ps.setString(2, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error updating Truck: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
-        }
-    }
-
-    @Override
-    public void delete(String id) {
-        con = dbCon.makeConnection();
-        String sql = "DELETE FROM truck WHERE id_kendaraan=?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error deleting Truck: " + e.getMessage());
-        } finally {
-            dbCon.closeConnection();
-        }
-    }
-
-    @Override
-    public List<Truck> showData(String keyword) {
-        con = dbCon.makeConnection();
-        String sql = "SELECT k.*, t.jenis_roda FROM kendaraan k JOIN truck t ON k.id_kendaraan = t.id_kendaraan WHERE k.nama LIKE ?";
-        List<Truck> list = new ArrayList<>();
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, "%" + keyword + "%");
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Truck t = new Truck(
-                    rs.getString("id_kendaraan"),
-                    rs.getString("nama"),
-                    rs.getFloat("harga"),
-                    rs.getBytes("gambar"),
-                    rs.getString("jenis_roda")
-                );
-                list.add(t);
-            }
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Error fetching Truck: " + e.getMessage());
+        String sql = "DELETE FROM `Truck` WHERE `id_kendaraan` = '"+id_kendaraan+"'";
+        System.out.println("Deleting Truck...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " kendaraan " + id_kendaraan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating kendaraan...");
+            System.out.println(e);
         }
         dbCon.closeConnection();
-        return list;
+    }
+    
+    public void updateJenis (Truck tk, String id_kendaraan){
+        con = dbCon.makeConnection();
+        
+        String sql = "UPDATE `"
+                + tk.getJenis_kendaraan()
+                + "` SET `jenis_roda`='"
+                + tk.getJenis_roda()
+                + "' WHERE `truck`.id_kendaraan = '"
+                + id_kendaraan
+                + "'";
+        System.out.println("Updating Jenis kendaraan...");
+        
+        try{
+            Statement statement = con.createStatement();
+            int result = statement.executeUpdate(sql);
+            System.out.println("Edited" + result + " kendaraan" + id_kendaraan);
+            statement.close();
+        }catch(Exception e){
+            System.out.println("Error Updating kendaraan...");
+            System.out.println(e);
+        }
+        dbCon.closeConnection();
+    }
+    
+    public void update(Kendaraan k, String id_kendaraan, String jenis_roda) {
+        Truck tk = new Truck(jenis_roda, k.getId_kendaraan(), k.getNama_kendaraan(), k.getJenis_kendaraan(), k.getHarga(), k.getGambar());
+        if(cekPerubahanJenis("Truck",id_kendaraan)){
+            deleteOldJenis(id_kendaraan);
+            insertNewJenis(tk);
+        }else{
+            updateJenis((Truck) k, id_kendaraan);
+        }
+        super.update(k, id_kendaraan);
     }
 } 
 
