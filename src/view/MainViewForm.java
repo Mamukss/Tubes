@@ -795,7 +795,7 @@ public class MainViewForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "ANDA TELAH LOGIN");
             System.out.println("INI CEK JABATN KARYAWAN " + k.getJabatan());
             setLoginPanel(false, true);
-            if(k.getJabatan().equals("Owner")){
+            if(k.getJabatan().equals("Pemilik")){
                 setOwnerPanel(true);
             }else if (k.getJabatan().equalsIgnoreCase("Manager")){
                 setManagerPanel(true);

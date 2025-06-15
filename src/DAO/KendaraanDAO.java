@@ -78,7 +78,7 @@ public class KendaraanDAO implements IDAO<Kendaraan, String>, IShowDataList<Kend
     public List<Kendaraan> showData(String search) {
         con = dbCon.makeConnection();
 
-        String sql = "SELECT kendaraan.*, motor.jumlah_tak, mobil.jenis_mesin, truck.jenis_roda FROM menu\n"
+        String sql = "SELECT kendaraan.*, motor.jumlah_tak, mobil.jenis_mesin, truck.jenis_roda FROM kendaraan\n"
                 + "LEFT JOIN motor ON kendaraan.id_kendaraan = motor.id_kendaraan\n"
                 + "LEFT JOIN mobil ON kendaraan.id_kendaraan = mobil.id_kendaraan\n"
                 + "LEFT JOIN truck ON kendaraan.id_kendaraan = truck.id_kendaraan\n"

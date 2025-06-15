@@ -32,7 +32,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
         con = dbCon.makeConnection();
         
         String sql = 
-        "INSERT INTO `customer` (`id_customer`, `nama_customer`, `alamat`, `nomor_telepon`) " +
+        "INSERT INTO `customer` (`id_customer`, `nama`, `alamat`, `nomor_telepon`) " +
         "VALUES ('"+C.getId_customer()+"', '"+ C.getNama_customer() +"', '"+ C.getAlamat_customer() +"', '"+ C.getNomor_telepon() +"')";
     
         System.out.println("Adding customer...");
@@ -65,7 +65,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
                 while(rs.next())
                     c = new Customer(
                         rs.getString("id_customer"),
-                        rs.getString("nama_customer"),
+                        rs.getString("nama"),
                         rs.getString("alamat"),
                         rs.getString("nomor_telepon"));
             
@@ -85,7 +85,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
         
         String sql = "SELECT * FROM customer WHERE "
                 + "`id_customer` LIKE '%"+ data +"%' OR "
-                + "`nama_customer` LIKE '%"+ data +"%' OR "
+                + "`nama` LIKE '%"+ data +"%' OR "
                 + "`alamat` LIKE '%"+ data +"%'";
         System.out.println("Fetching Data...");
         List<Customer> c = new ArrayList();
@@ -98,7 +98,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
                 while(rs.next())
                     c.add(new Customer(
                         rs.getString("id_customer"),
-                        rs.getString("nama_customer"),
+                        rs.getString("nama"),
                         rs.getString("alamat"),
                         rs.getString("nomor_telepon")));
             // ingat, jika tidak perlu pakai {} maka hilangkan saja (ytta)
@@ -120,7 +120,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
         
         String sql = "UPDATE `customer` SET "
                 + "`id_customer`='" + c.getId_customer()+ "',"
-                + "`nama_customer`='" + c.getNama_customer()+ "',"
+                + "`nama`='" + c.getNama_customer()+ "',"
                 + "`alamat`='" + c.getAlamat_customer()+ "',"
                 + "`nomor_telepon`='" + c.getNomor_telepon()+ "' "
                 + "WHERE `id_customer`='" + id_customer + "'";
@@ -172,7 +172,7 @@ public class CustomerDAO implements IDAO<Customer,String>, IShowDataList<Custome
                 while(rs.next())
                     c.add(new Customer(
                         rs.getString("id_customer"),
-                        rs.getString("nama_customer"),
+                        rs.getString("nama"),
                         rs.getString("alamat"),
                         rs.getString("nomor_telepon")));
             

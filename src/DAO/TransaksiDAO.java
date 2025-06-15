@@ -273,7 +273,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         String namaMenu = null;
         con = dbCon.makeConnection();
 
-        String sql = "SELECT m.nama_kendaraan, SUM(p.jumlah) AS jml " +
+        String sql = "SELECT nama_kendaraan, SUM(p.jumlah) AS jml " +
                      "FROM transaksi t " +
                      "JOIN pembelian p ON t.id_pembelian = p.id_pembelian " +
                      "JOIN kendaraan k ON p.id_kendaraan = k.id_kendaraan " +
