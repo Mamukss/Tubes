@@ -48,14 +48,14 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IGenerateID{
         con = dbCon.makeConnection();
         
         String sql = "SELECT * "
-                + "FROM reservasi R "
-                + "JOIN customer C ON (R.id_customer= P.id_customer) "
-                + "WHERE (P.nama_customer LIKE '%" + query + "%' "
-                + "OR P.nomor_telepon LIKE '%" + query + "%' "
-                + "OR P.alamat LIKE '%" + query + "%' "
-                + "OR R.tanggal_reservasi LIKE '%" + query + "%' "
-                + "OR R.jenis_reservasi LIKE '%" + query + "%' "
-                + "OR R.paket_reservasi LIKE '%" + query + "%')";
+           + "FROM reservasi R "
+           + "JOIN customer C ON (R.id_customer = C.id_customer) "
+           + "WHERE (C.nama LIKE '%" + query + "%' "
+           + "OR C.nomor_telepon LIKE '%" + query + "%' "
+           + "OR C.alamat LIKE '%" + query + "%' "
+           + "OR R.tanggal_reservasi LIKE '%" + query + "%' "
+           + "OR R.jenis_reservasi LIKE '%" + query + "%' "
+           + "OR R.paket_reservasi LIKE '%" + query + "%')";
         System.out.println("Mengambil data Reservasi...");
         List<Reservasi> listReservasi = new ArrayList<>();
         
@@ -68,10 +68,10 @@ public class ReservasiDAO implements IDAO<Reservasi, String>, IGenerateID{
             if(rs != null){
                 while(rs.next()){
                     targetSingleData = new Customer(
-                        rs.getString("p.id_customer"),
-                        rs.getString("p.nama_customer"),
-                        rs.getString("p.alamat"),
-                        rs.getString("p.nomor_telepon")
+                        rs.getString("c.id_customer"),
+                        rs.getString("c.nama"),
+                        rs.getString("c.alamat"),
+                        rs.getString("c.nomor_telepon")
                     );
                     
                     Reservasi r = new Reservasi(

@@ -207,7 +207,6 @@ public class KendaraanMainPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         searchProdukInputPanel = new javax.swing.JPanel();
         searchProdukInputLabel = new javax.swing.JLabel();
@@ -371,8 +370,8 @@ public class KendaraanMainPane extends javax.swing.JPanel {
             .addGroup(idProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(idProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(idProdukInputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(idProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(idProdukInputTextField)
+                    .addComponent(idProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         idProdukInputPanelLayout.setVerticalGroup(
@@ -432,8 +431,8 @@ public class KendaraanMainPane extends javax.swing.JPanel {
             .addGroup(hargaProdukInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(hargaProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(hargaProdukInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(hargaProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(hargaProdukInputTextfield)
+                    .addComponent(hargaProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         hargaProdukInputPanelLayout.setVerticalGroup(
@@ -507,7 +506,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                 .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ProdukFormPanelLayout.createSequentialGroup()
                         .addComponent(ProdukButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 302, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(ProdukFormPanelLayout.createSequentialGroup()
                         .addGroup(ProdukFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(namaProdukInputPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -519,7 +518,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                             .addGroup(ProdukFormPanelLayout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(jenisKendaraanPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 98, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         ProdukFormPanelLayout.setVerticalGroup(
@@ -575,8 +574,8 @@ public class KendaraanMainPane extends javax.swing.JPanel {
             .addGroup(specialAtributeInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(specialAtributeInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(specialAtributeInputTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(specialAtributeInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(specialAtributeInputTextfield)
+                    .addComponent(specialAtributeInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         specialAtributeInputPanelLayout.setVerticalGroup(
@@ -631,7 +630,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                 .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tambahGambarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +643,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                 .addComponent(specialAtributeInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(gambarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(kendaraanFormPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanProdukButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -735,106 +734,160 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                     .addComponent(MotrorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addComponent(MobilScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(TruckScrolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchProdukInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProdukInputTextFieldKeyPressed
+    private void tabelTruckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTruckMouseClicked
         // TODO add your handling code here:
-        if (evt.getKeyChar() == '\n') {
-            showTableBySearch(searchProdukInputTextField.getText());
-        }
-    }//GEN-LAST:event_searchProdukInputTextFieldKeyPressed
+        //        tabelTruck.clearSelection();
 
-    private void searchProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProdukInputButtonActionPerformed
-        // TODO add your handling code here:
-        showTableBySearch(searchProdukInputTextField.getText());
-    }//GEN-LAST:event_searchProdukInputButtonActionPerformed
-
-    private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
-        // TODO add your handling code here:
         action = "update";
-        setComponentsData(true);
-        idProdukInputTextField.setEnabled(false);
-    }//GEN-LAST:event_barukanProdukButtonActionPerformed
 
-    private void hapusProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusProdukButtonActionPerformed
-        // TODO add your handling code here:
-        int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin Hapus ?", "Hapus Data", JOptionPane.YES_NO_OPTION);
-        if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
+        tambahProdukButton.setEnabled(false);
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);
+        setEditDeleteButton(true);
+
+        setComponentsData(false);
+
+        int clickedRow = tabelTruck.getSelectedRow();
+        TableModel tableModel = tabelTruck.getModel();
+
+        if (tabelTruck.getRowSorter() != null) {
+            clickedRow = tabelTruck.convertRowIndexToModel(clickedRow);
+        }
+
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        truckCheckbox.setSelected(true);
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
+        setSpecialAtributeLabel();
+        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelTruckMouseClicked
+
+    private void tabelMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMotorMouseClicked
+        tabelMobil.clearSelection();
+
+        action = "update";
+
+        tambahProdukButton.setEnabled(false);
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);
+        setEditDeleteButton(true);
+
+        setComponentsData(false);
+
+        int clickedRow = tabelMotor.getSelectedRow();
+        TableModel tableModel = tabelMotor.getModel();
+
+        if (tabelMotor.getRowSorter() != null) {
+            clickedRow = tabelMotor.convertRowIndexToModel(clickedRow);
+        }
+
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        motorCheckbox.setSelected(true);
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
+        setSpecialAtributeLabel();
+        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelMotorMouseClicked
+
+    private void tabelMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMobilMouseClicked
+        tabelMotor.clearSelection();
+        action = "update";
+        tambahProdukButton.setEnabled(false);
+        cancelButton.setEnabled(true);
+        simpanProdukButton.setEnabled(true);
+        setEditDeleteButton(true);
+
+        setComponentsData(false);
+
+        int clickedRow = tabelMobil.getSelectedRow();
+
+        if (tabelMobil.getRowSorter() != null) {
+            clickedRow = tabelMobil.convertRowIndexToModel(clickedRow);
+        }
+
+        TableModel tableModel = tabelMobil.getModel();
+
+        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
+
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        mobilCheckbox.setSelected(true);
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
+        setSpecialAtributeLabel();
+        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelMobilMouseClicked
+
+    private void tambahGambarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahGambarButtonActionPerformed
+        if (action == null) {
             return;
         }
-        if(motorCheckbox.isSelected()){
-            motorControl.delete(idProdukInputTextField.getText());
-        }else if(mobilCheckbox.isSelected()){
-            mobilControl.delete(idProdukInputTextField.getText());
-        }else{
-            truckControl.delete(idProdukInputTextField.getText());
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Gambar", "jpg", "png", "jpeg"));
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                BufferedImage img = ImageIO.read(selectedFile);
+                Image dimg = img.getScaledInstance(gambarLabel.getWidth(), gambarLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(dimg);
+                gambarLabel.setIcon(icon);
+
+                // Tentukan format berdasarkan ekstensi file
+                String extension = getFileExtension(selectedFile);
+                if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png")) {
+                    throw new IOException("Unsupported file format: " + extension);
+                }
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(img, extension, baos);
+                baos.flush();
+                gambarBytes = baos.toByteArray();
+                baos.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
+    }//GEN-LAST:event_tambahGambarButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
+        setEditDeleteButton(false);
         tambahProdukButton.setEnabled(true);
+        tabelMobil.clearSelection();
+        tabelMotor.clearSelection();
+        gambarLabel.setIcon(null);
         showTableBySearch("");
-    }//GEN-LAST:event_hapusProdukButtonActionPerformed
-
-    private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
-        // TODO add your handling code here:
-        action = "add";
-        clearTextData();
-        setEditDeleteButton(false);
-        setComponentsData(true);
-        setEditDeleteButton(false);
-
-        idProdukInputTextField.setEnabled(false);
-        if(motorCheckbox.isSelected()){
-            idProdukInputTextField.setText(motorControl.generateId());
-        }else if(mobilCheckbox.isSelected()){
-            idProdukInputTextField.setText(mobilControl.generateId());
-        }else{
-            idProdukInputTextField.setText(truckControl.generateId());
-        }
-        
-        setSpecialAtributeLabel();
-    }//GEN-LAST:event_tambahProdukButtonActionPerformed
-
-    private void hargaProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaProdukInputTextfieldKeyTyped
-        // TODO add your handling code here:
-        char key = evt.getKeyChar();
-        if (!Character.isDigit(key) && key != KeyEvent.VK_BACK_SPACE || key == '.') {
-            evt.consume();
-            JOptionPane.showMessageDialog(
-                null, "Hanya bisa masukan angka !!", "Input Failure", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_hargaProdukInputTextfieldKeyTyped
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void simpanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanProdukButtonActionPerformed
         // TODO add your handling code here:
@@ -843,7 +896,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
         }
         try {
             inputKosongMenuException();
-//            InputUkuranSpecialException();
+            //            InputUkuranSpecialException();
 
             int dialog = JOptionPane.showConfirmDialog(rootPane, "yakin ingin melakukan " + action + "?");
             if (dialog == JOptionPane.CLOSED_OPTION || dialog == JOptionPane.NO_OPTION || dialog == JOptionPane.CANCEL_OPTION) {
@@ -862,7 +915,7 @@ public class KendaraanMainPane extends javax.swing.JPanel {
                     motorControl.insert(motor);
                 }else{
                     truck = new Truck(specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(),
-                        mobilCheckbox.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
+                        truckCheckbox.getText(), Float.parseFloat(hargaProdukInputTextfield.getText()), gambarBytes);
                     truckControl.insert(truck);
                 }
                 break;
@@ -901,9 +954,9 @@ public class KendaraanMainPane extends javax.swing.JPanel {
         } catch (InputKosongException e) {
             JOptionPane.showMessageDialog(rootPane, e.message());
         }
-//        } catch (InputSpecialAtributeException e2) { // MENGECEK UKURAN MINUMAN YANG HARUS ANGKA
-//            JOptionPane.showMessageDialog(rootPane, e2.message("Ukuran Hanya :  S / M / L"));
-//        }
+        //        } catch (InputSpecialAtributeException e2) { // MENGECEK UKURAN MINUMAN YANG HARUS ANGKA
+        //            JOptionPane.showMessageDialog(rootPane, e2.message("Ukuran Hanya :  S / M / L"));
+        //        }
         clearTextData();
         setEditDeleteButton(false);
         setComponentsData(false);
@@ -913,147 +966,78 @@ public class KendaraanMainPane extends javax.swing.JPanel {
         action = null;
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        clearTextData();
-        setEditDeleteButton(false);
-        setComponentsData(false);
-        setEditDeleteButton(false);
-        tambahProdukButton.setEnabled(true);
-        tabelMobil.clearSelection();
-        tabelMotor.clearSelection();
-        gambarLabel.setIcon(null);
-        showTableBySearch("");
-    }//GEN-LAST:event_cancelButtonActionPerformed
-
-    private void tambahGambarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahGambarButtonActionPerformed
-        if (action == null) {
-            return;
-        }
-
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Gambar", "jpg", "png", "jpeg"));
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                BufferedImage img = ImageIO.read(selectedFile);
-                Image dimg = img.getScaledInstance(gambarLabel.getWidth(), gambarLabel.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon icon = new ImageIcon(dimg);
-                gambarLabel.setIcon(icon);
-
-                // Tentukan format berdasarkan ekstensi file
-                String extension = getFileExtension(selectedFile);
-                if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png")) {
-                    throw new IOException("Unsupported file format: " + extension);
-                }
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(img, extension, baos);
-                baos.flush();
-                gambarBytes = baos.toByteArray();
-                baos.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }//GEN-LAST:event_tambahGambarButtonActionPerformed
-
-    private void tabelMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMobilMouseClicked
-        tabelMotor.clearSelection();
-        action = "update";
-        tambahProdukButton.setEnabled(false);
-        cancelButton.setEnabled(true);
-        simpanProdukButton.setEnabled(true);
-        setEditDeleteButton(true);
-
-        setComponentsData(false);
-
-        int clickedRow = tabelMobil.getSelectedRow();
-
-        if (tabelMobil.getRowSorter() != null) {
-            clickedRow = tabelMobil.convertRowIndexToModel(clickedRow);
-        }
-
-        TableModel tableModel = tabelMobil.getModel();
-
-        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
-
-        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
-        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        mobilCheckbox.setSelected(true);
-        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
-        setSpecialAtributeLabel();
-        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
-        cancelButton.setEnabled(true);
-    }//GEN-LAST:event_tabelMobilMouseClicked
-
-    private void tabelMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMotorMouseClicked
-        tabelMobil.clearSelection();
-
-        action = "update";
-
-        tambahProdukButton.setEnabled(false);
-        cancelButton.setEnabled(true);
-        simpanProdukButton.setEnabled(true);
-        setEditDeleteButton(true);
-
-        setComponentsData(false);
-
-        int clickedRow = tabelMotor.getSelectedRow();
-        TableModel tableModel = tabelMotor.getModel();
-
-        if (tabelMotor.getRowSorter() != null) {
-            clickedRow = tabelMotor.convertRowIndexToModel(clickedRow);
-        }
-
-        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
-
-        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
-        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        motorCheckbox.setSelected(true);
-        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
-        setSpecialAtributeLabel();
-        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
-        cancelButton.setEnabled(true);
-    }//GEN-LAST:event_tabelMotorMouseClicked
-
     private void mobilCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilCheckboxActionPerformed
 
     }//GEN-LAST:event_mobilCheckboxActionPerformed
 
-    private void tabelTruckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTruckMouseClicked
+    private void hargaProdukInputTextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaProdukInputTextfieldKeyTyped
         // TODO add your handling code here:
-        tabelTruck.clearSelection();
+        char key = evt.getKeyChar();
+        if (!Character.isDigit(key) && key != KeyEvent.VK_BACK_SPACE || key == '.') {
+            evt.consume();
+            JOptionPane.showMessageDialog(
+                null, "Hanya bisa masukan angka !!", "Input Failure", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_hargaProdukInputTextfieldKeyTyped
 
-        action = "update";
+    private void tambahProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahProdukButtonActionPerformed
+        // TODO add your handling code here:
+        action = "add";
+        clearTextData();
+        setEditDeleteButton(false);
+        setComponentsData(true);
+        setEditDeleteButton(false);
 
-        tambahProdukButton.setEnabled(false);
-        cancelButton.setEnabled(true);
-        simpanProdukButton.setEnabled(true);
-        setEditDeleteButton(true);
-
-        setComponentsData(false);
-
-        int clickedRow = tabelTruck.getSelectedRow();
-        TableModel tableModel = tabelTruck.getModel();
-
-        if (tabelTruck.getRowSorter() != null) {
-            clickedRow = tabelTruck.convertRowIndexToModel(clickedRow);
+        idProdukInputTextField.setEnabled(false);
+        if(motorCheckbox.isSelected()){
+            idProdukInputTextField.setText(motorControl.generateId());
+        }else if(mobilCheckbox.isSelected()){
+            idProdukInputTextField.setText(mobilControl.generateId());
+        }else{
+            idProdukInputTextField.setText(truckControl.generateId());
         }
 
-        selectedId = tableModel.getValueAt(clickedRow, 0).toString();
-
-        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
-        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        truckCheckbox.setSelected(true);
-        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
-        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
         setSpecialAtributeLabel();
-        setImageIcon((byte[]) tableModel.getValueAt(clickedRow, 5));
-        cancelButton.setEnabled(true);
-    }//GEN-LAST:event_tabelTruckMouseClicked
+    }//GEN-LAST:event_tambahProdukButtonActionPerformed
+
+    private void hapusProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusProdukButtonActionPerformed
+        // TODO add your handling code here:
+        int opsi = JOptionPane.showConfirmDialog(rootPane, "Yakin Ingin Hapus ?", "Hapus Data", JOptionPane.YES_NO_OPTION);
+        if (opsi == JOptionPane.NO_OPTION || opsi == JOptionPane.CLOSED_OPTION) {
+            return;
+        }
+        if(motorCheckbox.isSelected()){
+            motorControl.delete(idProdukInputTextField.getText());
+        }else if(mobilCheckbox.isSelected()){
+            mobilControl.delete(idProdukInputTextField.getText());
+        }else{
+            truckControl.delete(idProdukInputTextField.getText());
+        }
+        clearTextData();
+        setEditDeleteButton(false);
+        setComponentsData(false);
+        tambahProdukButton.setEnabled(true);
+        showTableBySearch("");
+    }//GEN-LAST:event_hapusProdukButtonActionPerformed
+
+    private void barukanProdukButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barukanProdukButtonActionPerformed
+        // TODO add your handling code here:
+        action = "update";
+        setComponentsData(true);
+        idProdukInputTextField.setEnabled(false);
+    }//GEN-LAST:event_barukanProdukButtonActionPerformed
+
+    private void searchProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProdukInputButtonActionPerformed
+        // TODO add your handling code here:
+        showTableBySearch(searchProdukInputTextField.getText());
+    }//GEN-LAST:event_searchProdukInputButtonActionPerformed
+
+    private void searchProdukInputTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProdukInputTextFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == '\n') {
+            showTableBySearch(searchProdukInputTextField.getText());
+        }
+    }//GEN-LAST:event_searchProdukInputTextFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1073,7 +1057,6 @@ public class KendaraanMainPane extends javax.swing.JPanel {
     private javax.swing.JLabel idProdukInputLabel;
     private javax.swing.JPanel idProdukInputPanel;
     private javax.swing.JTextField idProdukInputTextField;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jenisKendaraanLabel;
     private javax.swing.JPanel jenisKendaraanPanel;
     private javax.swing.JPanel kendaraanFormPanel2;

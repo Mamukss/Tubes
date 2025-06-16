@@ -148,7 +148,7 @@ public class CustomerMainPanel extends javax.swing.JPanel {
         searchCustomerInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         searchCustomerInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        searchCustomerInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        searchCustomerInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         searchCustomerInputLabel.setText("Pencarian Customer");
 
         searchCustomerInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -230,7 +230,7 @@ public class CustomerMainPanel extends javax.swing.JPanel {
 
         idCustomerInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         idCustomerInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idCustomerInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        idCustomerInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         idCustomerInputLabel.setText("ID Customer");
 
         idCustomerInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -262,7 +262,7 @@ public class CustomerMainPanel extends javax.swing.JPanel {
 
         nomorTeleponInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         nomorTeleponInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        nomorTeleponInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        nomorTeleponInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         nomorTeleponInputLabel.setText("Nomor Telepon");
 
         nomorTeleponInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -292,7 +292,7 @@ public class CustomerMainPanel extends javax.swing.JPanel {
         namaCustomerInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         namaCustomerInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        namaCustomerInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        namaCustomerInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         namaCustomerInputLabel.setText("Nama");
 
         namaCustomerInputTextfield.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -329,7 +329,7 @@ public class CustomerMainPanel extends javax.swing.JPanel {
 
         alamatInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         alamatInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        alamatInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        alamatInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         alamatInputLabel.setText("Alamat");
 
         javax.swing.GroupLayout alamatInputPanelLayout = new javax.swing.GroupLayout(alamatInputPanel);

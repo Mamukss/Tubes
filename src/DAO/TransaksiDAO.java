@@ -111,7 +111,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
 
         String sql = "SELECT t.id_pembelian, t.id_karyawan, t.id_customer, t.tanggal_pesanan, t.total_harga, " 
                  + "k.nama_karyawan, k.jabatan, k.gaji, " 
-                 + "p.nama_customer, p.alamat, p.nomor_telepon " 
+                 + "c.nama, c.alamat, c.nomor_telepon " 
                  + "FROM transaksi t " 
                  + "JOIN karyawan k ON t.id_karyawan = k.id_karyawan " 
                  + "JOIN customer c ON t.id_customer = c.id_customer " 
@@ -119,7 +119,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
                  + "OR t.id_karyawan LIKE '%" + data + "%' " 
                  + "OR t.id_customer LIKE '%" + data + "%' " 
                  + "OR k.nama_karyawan LIKE '%" + data + "%' " 
-                 + "OR p.nama_customer LIKE '%" + data + "%'"
+                 + "OR c.nama LIKE '%" + data + "%'"
                  + "ORDER BY t.id_pembelian";
         System.out.println("Fetching Data...");
         List<Transaksi> c = new ArrayList<>();
@@ -138,7 +138,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
                     );
                     Customer cs = new Customer(
                             rs.getString("id_customer"),
-                            rs.getString("nama_customer"),
+                            rs.getString("nama"),
                             rs.getString("alamat"),
                             rs.getString("nomor_telepon")
                     );
@@ -211,7 +211,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         Connection con = dbCon.makeConnection();
 
         String sql = "SELECT SUM(sub_total) AS sub " +
-                     "FROM pembelian " +
+                     "FROM pembelian_Kendaraan " +
                      "WHERE id_pembelian = '" + id_pembelian + "'";
 
         System.out.println("Hitung Total Harga...");
@@ -243,7 +243,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         
         String sql = "SELECT SUM(p.jumlah) AS jml " +
                  "FROM transaksi t " +
-                 "JOIN pembelian p ON t.id_pembelian = p.id_pembelian " +
+                 "JOIN pembelian_Kendaraan p ON t.id_pembelian = p.id_pembelian " +
                  "GROUP BY p.id_kendaraan " +
                  "ORDER BY jml DESC " +
                  "LIMIT 1";
@@ -275,7 +275,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
 
         String sql = "SELECT nama_kendaraan, SUM(p.jumlah) AS jml " +
                      "FROM transaksi t " +
-                     "JOIN pembelian p ON t.id_pembelian = p.id_pembelian " +
+                     "JOIN pembelian_Kendaraan p ON t.id_pembelian = p.id_pembelian " +
                      "JOIN kendaraan k ON p.id_kendaraan = k.id_kendaraan " +
                      "GROUP BY p.id_kendaraan " +
                      "ORDER BY jml DESC " +
@@ -334,7 +334,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
         int totalTransaksi = 0;
         con = dbCon.makeConnection();
 
-        String sql = "SELECT COUNT(t.id_pesanan) AS total " +
+        String sql = "SELECT COUNT(t.id_pembelian) AS total " +
                      "FROM transaksi t";
         System.out.println("Fetching Data Mencari Total Transaksi...");
 
@@ -363,10 +363,10 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
 
         String sql = "SELECT t.id_pembelian, t.id_karyawan, t.id_customer, t.tanggal_pesanan, t.total_harga, " 
                  + "k.nama_karyawan, k.jabatan, k.gaji, " 
-                 + "c.nama_customer, c.alamat, c.nomor_telepon " 
+                 + "c.nama, c.alamat, c.nomor_telepon " 
                  + "FROM transaksi t " 
                  + "JOIN karyawan k ON t.id_karyawan = k.id_karyawan " 
-                 + "JOIN pembelian c ON t.id_customer = c.id_customer " 
+                 + "JOIN pembelian_Kendaraan c ON t.id_customer = c.id_customer " 
                  + "WHERE t.tanggal_pesanan BETWEEN '" + tanggalMulai + "' AND '" + tanggalSelesai + "'"
                  + "ORDER BY t.id_pembelian";
         System.out.println("Fetching Data...");
@@ -386,7 +386,7 @@ public class TransaksiDAO implements IDAO<Transaksi, String>, IGenerateID{
                     );
                     Customer cs = new Customer(
                             rs.getString("id_customer"),
-                            rs.getString("nama_customer"),
+                            rs.getString("nama"),
                             rs.getString("alamat"),
                             rs.getString("nomor_telepon")
                     );

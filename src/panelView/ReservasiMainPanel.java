@@ -216,14 +216,10 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         totalHargaPanel = new javax.swing.JPanel();
         totalHargaLabel = new javax.swing.JLabel();
         totalHargaInputTextField = new javax.swing.JTextField();
-        radioPanel1 = new javax.swing.JPanel();
-        radioLabel1 = new javax.swing.JLabel();
-        radioData3 = new javax.swing.JRadioButton();
-        radioData4 = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 218, 182));
 
-        mainPanel.setBackground(new java.awt.Color(255, 218, 182));
+        mainPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         tabelReservasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -265,10 +261,10 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        searchReservasiInputPanel.setBackground(new java.awt.Color(255, 218, 182));
+        searchReservasiInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         searchReservasiInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        searchReservasiInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        searchReservasiInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         searchReservasiInputLabel.setText("Pencarian Reservasi");
 
         searchReservasiInputTextField.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -288,9 +284,9 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        reservasiFormPanel.setBackground(new java.awt.Color(255, 218, 182));
+        reservasiFormPanel.setBackground(new java.awt.Color(153, 153, 255));
 
-        reservasiButtonPanel.setBackground(new java.awt.Color(255, 218, 182));
+        reservasiButtonPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         barukanReservasiButton.setBackground(new java.awt.Color(255, 175, 47));
         barukanReservasiButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -346,11 +342,11 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        namaPelangganInputPanel.setBackground(new java.awt.Color(255, 218, 182));
+        namaPelangganInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         namaPelangganInputLabel.setBackground(new java.awt.Color(0, 0, 0));
         namaPelangganInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        namaPelangganInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        namaPelangganInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         namaPelangganInputLabel.setText("Nama Customer");
 
         javax.swing.GroupLayout namaPelangganInputPanelLayout = new javax.swing.GroupLayout(namaPelangganInputPanel);
@@ -379,15 +375,15 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        checkboxPanel.setBackground(new java.awt.Color(255, 218, 182));
+        checkboxPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         checkboxLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        checkboxLabel.setForeground(new java.awt.Color(137, 92, 3));
+        checkboxLabel.setForeground(new java.awt.Color(255, 255, 255));
         checkboxLabel.setText("Jenis Kendaraan");
 
-        checkboxData1.setBackground(new java.awt.Color(255, 218, 182));
+        checkboxData1.setBackground(new java.awt.Color(153, 153, 255));
         checkboxData1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        checkboxData1.setForeground(new java.awt.Color(137, 92, 3));
+        checkboxData1.setForeground(new java.awt.Color(255, 255, 255));
         checkboxData1.setText("Mobil");
         checkboxData1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,9 +391,9 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        checkboxData2.setBackground(new java.awt.Color(255, 218, 182));
+        checkboxData2.setBackground(new java.awt.Color(153, 153, 255));
         checkboxData2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        checkboxData2.setForeground(new java.awt.Color(137, 92, 3));
+        checkboxData2.setForeground(new java.awt.Color(255, 255, 255));
         checkboxData2.setText("Motor");
         checkboxData2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -405,9 +401,9 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        checkboxData3.setBackground(new java.awt.Color(255, 218, 182));
+        checkboxData3.setBackground(new java.awt.Color(153, 153, 255));
         checkboxData3.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        checkboxData3.setForeground(new java.awt.Color(137, 92, 3));
+        checkboxData3.setForeground(new java.awt.Color(255, 255, 255));
         checkboxData3.setText("Truck");
         checkboxData3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,16 +441,16 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        radioPanel.setBackground(new java.awt.Color(255, 218, 182));
+        radioPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         radioLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioLabel.setForeground(new java.awt.Color(137, 92, 3));
+        radioLabel.setForeground(new java.awt.Color(255, 255, 255));
         radioLabel.setText("Jenis");
 
-        radioData1.setBackground(new java.awt.Color(255, 218, 182));
+        radioData1.setBackground(new java.awt.Color(153, 153, 255));
         radioButtonGroup.add(radioData1);
         radioData1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioData1.setForeground(new java.awt.Color(137, 92, 3));
+        radioData1.setForeground(new java.awt.Color(255, 255, 255));
         radioData1.setText("Test Drive");
         radioData1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,10 +458,10 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        radioData2.setBackground(new java.awt.Color(255, 218, 182));
+        radioData2.setBackground(new java.awt.Color(153, 153, 255));
         radioButtonGroup.add(radioData2);
         radioData2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioData2.setForeground(new java.awt.Color(137, 92, 3));
+        radioData2.setForeground(new java.awt.Color(255, 255, 255));
         radioData2.setText("Cek Kendaraan");
         radioData2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,10 +493,10 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        totalHargaPanel.setBackground(new java.awt.Color(255, 218, 182));
+        totalHargaPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         totalHargaLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        totalHargaLabel.setForeground(new java.awt.Color(137, 92, 3));
+        totalHargaLabel.setForeground(new java.awt.Color(255, 255, 255));
         totalHargaLabel.setText("Total Harga");
 
         totalHargaInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -526,58 +522,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        radioPanel1.setBackground(new java.awt.Color(255, 218, 182));
-
-        radioLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioLabel1.setForeground(new java.awt.Color(137, 92, 3));
-        radioLabel1.setText("Jenis");
-
-        radioData3.setBackground(new java.awt.Color(255, 218, 182));
-        radioButtonGroup.add(radioData3);
-        radioData3.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioData3.setForeground(new java.awt.Color(137, 92, 3));
-        radioData3.setText("Out Door");
-        radioData3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioData3ActionPerformed(evt);
-            }
-        });
-
-        radioData4.setBackground(new java.awt.Color(255, 218, 182));
-        radioButtonGroup.add(radioData4);
-        radioData4.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        radioData4.setForeground(new java.awt.Color(137, 92, 3));
-        radioData4.setText("In Door");
-        radioData4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioData4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout radioPanel1Layout = new javax.swing.GroupLayout(radioPanel1);
-        radioPanel1.setLayout(radioPanel1Layout);
-        radioPanel1Layout.setHorizontalGroup(
-            radioPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(radioPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(radioPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radioLabel1)
-                    .addComponent(radioData3)
-                    .addComponent(radioData4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        radioPanel1Layout.setVerticalGroup(
-            radioPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(radioPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(radioLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(radioData3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(radioData4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout reservasiFormPanelLayout = new javax.swing.GroupLayout(reservasiFormPanel);
         reservasiFormPanel.setLayout(reservasiFormPanelLayout);
         reservasiFormPanelLayout.setHorizontalGroup(
@@ -593,10 +537,7 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                                 .addGap(12, 12, 12)
                                 .addComponent(checkboxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(reservasiFormPanelLayout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(radioPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(107, 107, 107)
                         .addComponent(totalHargaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12))))
@@ -613,11 +554,11 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
                     .addGroup(reservasiFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(reservasiFormPanelLayout.createSequentialGroup()
                             .addComponent(radioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(radioPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap(108, Short.MAX_VALUE))
                         .addComponent(checkboxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(totalHargaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(reservasiFormPanelLayout.createSequentialGroup()
+                        .addComponent(totalHargaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(126, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout searchReservasiInputPanelLayout = new javax.swing.GroupLayout(searchReservasiInputPanel);
@@ -961,14 +902,6 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
         menghitungTotalHarga();
     }//GEN-LAST:event_radioData1ActionPerformed
 
-    private void radioData3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioData3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioData3ActionPerformed
-
-    private void radioData4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioData4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioData4ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barukanReservasiButton;
@@ -987,12 +920,8 @@ public class ReservasiMainPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup radioButtonGroup;
     private javax.swing.JRadioButton radioData1;
     private javax.swing.JRadioButton radioData2;
-    private javax.swing.JRadioButton radioData3;
-    private javax.swing.JRadioButton radioData4;
     private javax.swing.JLabel radioLabel;
-    private javax.swing.JLabel radioLabel1;
     private javax.swing.JPanel radioPanel;
-    private javax.swing.JPanel radioPanel1;
     private javax.swing.JPanel reservasiButtonPanel;
     private javax.swing.JPanel reservasiFormPanel;
     private javax.swing.JButton searchReservasiInputButton;

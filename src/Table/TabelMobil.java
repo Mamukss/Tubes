@@ -55,7 +55,7 @@ public class TabelMobil extends AbstractTableModel{
             case 1:
                 return "Nama Kendaraan";
             case 2:
-                return "Jenis ";
+                return "Jenis Kendaraan";
             case 3:
                 return "Jenis_mesin";
             case 4:

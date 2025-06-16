@@ -33,7 +33,7 @@ public class PembelianDAO implements IDAOTransaksi<PembelianKendaraan, String>{
         con = dbCon.makeConnection();
         
     String sql = 
-        "INSERT INTO `pembelian_kendaraan`(`id_pembelian`, `id_customer`, `id_kendaraan`, `jumlah`, `tambahan`, `metode_pembayaran` `sub_total`) "
+        "INSERT INTO `pembelian_kendaraan`(`id_pembelian`, `id_customer`, `id_kendaraan`, `jumlah`, `tambahan`, `metode_pembayaran`, `sub_total`) "
             + "VALUES "
             + "('"+ C.getId_pembelian()+"',"
             + "'"+ C.getId_customer()+"',"

@@ -34,6 +34,7 @@ import Model.Customer;
 import Model.Transaksi;
 import Table.TabelPembelianKendaraan;
 import Table.TabelTransaksi;
+import java.util.List;
 
 public class TransaksiMainPanel extends javax.swing.JPanel {
 
@@ -48,6 +49,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     // DIPAKAI UNTUK MENCARI HARGA
     private final MobilControl mobilControl;
     private final MotorControl motorControl;
+    private final TruckControl truckControl;
     private TransaksiControl tc; // DIPAKAI UNTUK generateID dan INSERT SQL
     private final PembelianControl pesananControl = new PembelianControl(); // DIPAKAI UNTUK INSERT SQL PESANAN
     private final CustomerControl pelangganControl; // DIPAKAI UNTUK GenerateID dan INSERT SQL PELANGGAN
@@ -56,6 +58,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private ArrayList<PembelianKendaraan> pesananList = new ArrayList(); // DIPAKAI UNTUK MENJADI KERANJANG
     String action = null; // DIPAKAI UNTUK MENENTUKAN AKSI
     private Component rootPane;
+    List<Customer> listPelanggan;
 
     /**
      * Creates new form KendaraanView
@@ -65,6 +68,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tc = new TransaksiControl(new TransaksiDAO());
         mobilControl = new MobilControl(new MobilDAO());
         motorControl = new MotorControl(new MotorDAO());
+        truckControl = new TruckControl(new TruckDAO());
         pelangganControl = new CustomerControl((new CustomerDAO()));
         idPembelianKendaraanInputTextField.setText(tc.generateId());
         namaKaryawanInputTextField.setText(k.getNama_karyawan());
@@ -76,10 +80,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaKaryawanInputTextField.setEnabled(false);
         idPembelianKendaraanInputTextField.setEnabled(false);
         totalProdukInputTextfield.setEnabled(false);
-        jenisProdukInputButton.setEnabled(false);
+        mobilCheckbox.setSelected(false);
+        motorCheckbox.setSelected(false);
+        truckCheckbox.setSelected(false);
         // gapapa di ubah
         jDateChooser.setEnabled(true);
-        namaPelangganInputTextField.setEnabled(true);
+        specialAtributeInputTextfield.setEnabled(true);
 
         this.karyawan = k; // dapat dari login
 
@@ -90,6 +96,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         clearTextData();
 
     }
+   
+    
 
     private void setComponentsData(boolean value) { // DIPAKAI UNTUK MENGATUR AKSES EDITABLE FIELD
         jumlahProdukInputTextfield.setEnabled(value);
@@ -110,13 +118,27 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         jumlahProdukInputTextfield.setText("");
         cashCheckbox.setSelected(false);
         kreditCheckbox.setSelected(false);
+        mobilCheckbox.setSelected(false);
+        motorCheckbox.setSelected(false);
+        truckCheckbox.setSelected(false);
     }
     
     private void setSpecialAtributeLabel() {
-        if (jenisProdukInputButton.getText().equals("Mobil")) {
-            specialAtributeInputLabel.setText("Catatan");
-        } else {
-            specialAtributeInputLabel.setText("Ukuran");
+        if (mobilCheckbox.isSelected()) {
+            specialAtributeInputLabel.setText("Jenis Mesin");
+        } else if(motorCheckbox.isSelected()){
+            specialAtributeInputLabel.setText("Jumlah Tak");
+        }else{
+            specialAtributeInputLabel.setText("Jenis Roda");
+        }
+    }
+    private String getSpecialAtributeLabel() {
+        if (mobilCheckbox.isSelected()) {
+            return "Mobil";
+        } else if(motorCheckbox.isSelected()){
+            return "Motor";
+        }else{
+            return "Truck";
         }
     }
     // DIPAKAI UNTUK SORTIR TABEL
@@ -162,10 +184,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private void showTableMenuBySearch(String target) {
         tabelMobil.setModel(mobilControl.showTableBySearch(target));
         tabelMotor.setModel(motorControl.showTableBySearch(target));
+        tabelTruck.setModel(truckControl.showTableBySearch(target));
         addHeaderMenu(tabelMobil);
         addHeaderMenu(tabelMotor);
+        addHeaderMenu(tabelTruck);
         tabelMobil.setEnabled(true); 
         tabelMotor.setEnabled(true);
+        tabelTruck.setEnabled(true);
     }
 
     // DIPAKAI UNTUK MENG SHOW TABEL PESANAN 
@@ -210,7 +235,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         namaKaryawanInputTextField = new javax.swing.JTextField();
         idProdukInputPanel4 = new javax.swing.JPanel();
         idPelangganLabel = new javax.swing.JLabel();
-        namaPelangganInputTextField = new javax.swing.JTextField();
+        specialAtrributeTextField = new javax.swing.JTextField();
         idProdukInputPanel5 = new javax.swing.JPanel();
         idKaryawanLabel1 = new javax.swing.JLabel();
         idPembelianKendaraanInputTextField = new javax.swing.JTextField();
@@ -236,10 +261,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         jumlahProdukInputTextfield = new javax.swing.JTextField();
         jenisProdukInputPanel1 = new javax.swing.JPanel();
         jenisProdukInputLabel = new javax.swing.JLabel();
-        jenisProdukInputButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cashCheckbox = new javax.swing.JCheckBox();
         kreditCheckbox = new javax.swing.JCheckBox();
+        mobilCheckbox = new javax.swing.JCheckBox();
+        motorCheckbox = new javax.swing.JCheckBox();
+        truckCheckbox = new javax.swing.JCheckBox();
         makananScrollPane = new javax.swing.JScrollPane();
         tabelMobil = new javax.swing.JTable();
         minumanScrollPane = new javax.swing.JScrollPane();
@@ -253,14 +280,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         totalProdukInputLabel1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelTruck = new javax.swing.JTable();
 
-        mainPanel.setBackground(new java.awt.Color(255, 221, 186));
+        mainPanel.setBackground(new java.awt.Color(153, 153, 255));
 
-        searchProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        searchProdukInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         searchProdukInputLabel.setBackground(new java.awt.Color(255, 221, 186));
         searchProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        searchProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        searchProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         searchProdukInputLabel.setText("Pencarian Kendaraan");
 
         searchProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -280,10 +309,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             }
         });
 
-        idProdukInputPanel2.setBackground(new java.awt.Color(255, 221, 186));
+        idProdukInputPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         idKaryawanLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idKaryawanLabel.setForeground(new java.awt.Color(137, 92, 3));
+        idKaryawanLabel.setForeground(new java.awt.Color(255, 255, 255));
         idKaryawanLabel.setText("ID Karyawan");
 
         namaKaryawanInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -309,13 +338,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        idProdukInputPanel4.setBackground(new java.awt.Color(255, 221, 186));
+        idProdukInputPanel4.setBackground(new java.awt.Color(153, 153, 255));
 
         idPelangganLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idPelangganLabel.setForeground(new java.awt.Color(137, 92, 3));
-        idPelangganLabel.setText("ID Pelanggan");
-
-        namaPelangganInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        idPelangganLabel.setForeground(new java.awt.Color(255, 255, 255));
+        idPelangganLabel.setText("Nama Pelanggan");
 
         javax.swing.GroupLayout idProdukInputPanel4Layout = new javax.swing.GroupLayout(idProdukInputPanel4);
         idProdukInputPanel4.setLayout(idProdukInputPanel4Layout);
@@ -325,7 +352,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(idProdukInputPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idPelangganLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(namaPelangganInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(specialAtrributeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         idProdukInputPanel4Layout.setVerticalGroup(
@@ -334,14 +361,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(idPelangganLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(namaPelangganInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(specialAtrributeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        idProdukInputPanel5.setBackground(new java.awt.Color(255, 221, 186));
+        idProdukInputPanel5.setBackground(new java.awt.Color(153, 153, 255));
 
         idKaryawanLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idKaryawanLabel1.setForeground(new java.awt.Color(137, 92, 3));
+        idKaryawanLabel1.setForeground(new java.awt.Color(255, 255, 255));
         idKaryawanLabel1.setText("ID Pembelian");
 
         idPembelianKendaraanInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -402,13 +429,13 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addGroup(searchProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idProdukInputPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(searchProdukInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(idProdukInputPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idProdukInputPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(idProdukInputPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
-        ProdukFormPanel.setBackground(new java.awt.Color(255, 221, 186));
+        ProdukFormPanel.setBackground(new java.awt.Color(153, 153, 255));
 
-        ProdukButtonPanel.setBackground(new java.awt.Color(255, 221, 186));
+        ProdukButtonPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         barukanProdukButton.setBackground(new java.awt.Color(255, 175, 47));
         barukanProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -466,10 +493,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        idProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        idProdukInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         idProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        idProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        idProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         idProdukInputLabel.setText("ID Kendaraan");
 
         idProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -495,12 +522,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        namaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        namaProdukInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         hargaProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         hargaProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        hargaProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        hargaProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         hargaProdukInputLabel.setText("Harga");
 
         javax.swing.GroupLayout namaProdukInputPanelLayout = new javax.swing.GroupLayout(namaProdukInputPanel);
@@ -525,12 +552,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        hargaProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        hargaProdukInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         namaProdukInputTextField.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         namaProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        namaProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        namaProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         namaProdukInputLabel.setText("Nama Kendaraan");
 
         javax.swing.GroupLayout hargaProdukInputPanelLayout = new javax.swing.GroupLayout(hargaProdukInputPanel);
@@ -555,12 +582,12 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jenisProdukInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        jenisProdukInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         specialAtributeInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         specialAtributeInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        specialAtributeInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        specialAtributeInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         specialAtributeInputLabel.setText("Tambahan");
 
         javax.swing.GroupLayout jenisProdukInputPanelLayout = new javax.swing.GroupLayout(jenisProdukInputPanel);
@@ -586,10 +613,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        specialAtributeInputPanel.setBackground(new java.awt.Color(255, 221, 186));
+        specialAtributeInputPanel.setBackground(new java.awt.Color(153, 153, 255));
 
         totalProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        totalProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        totalProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         totalProdukInputLabel.setText("Jumlah");
 
         jumlahProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -620,28 +647,40 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jenisProdukInputPanel1.setBackground(new java.awt.Color(255, 221, 186));
+        jenisProdukInputPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
         jenisProdukInputLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        jenisProdukInputLabel.setForeground(new java.awt.Color(137, 92, 3));
+        jenisProdukInputLabel.setForeground(new java.awt.Color(255, 255, 255));
         jenisProdukInputLabel.setText("Jenis Kendaraan");
 
-        jenisProdukInputButton.setBackground(new java.awt.Color(70, 39, 7));
-        jenisProdukInputButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        jenisProdukInputButton.setForeground(new java.awt.Color(255, 255, 255));
-        jenisProdukInputButton.setText("Minuman");
-        jenisProdukInputButton.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 10)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Metode Pembayran");
+
+        cashCheckbox.setBackground(new java.awt.Color(153, 153, 255));
+        cashCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        cashCheckbox.setText("Cash");
+
+        kreditCheckbox.setBackground(new java.awt.Color(153, 153, 255));
+        kreditCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        kreditCheckbox.setText("Kredit");
+
+        mobilCheckbox.setBackground(new java.awt.Color(153, 153, 255));
+        mobilCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        mobilCheckbox.setText("Mobil");
+        mobilCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jenisProdukInputButtonActionPerformed(evt);
+                mobilCheckboxActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 10)); // NOI18N
-        jLabel2.setText("Metode Pembayran");
+        motorCheckbox.setBackground(new java.awt.Color(153, 153, 255));
+        motorCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        motorCheckbox.setText("Motor");
 
-        cashCheckbox.setText("Cash");
-
-        kreditCheckbox.setText("Kredit");
+        truckCheckbox.setBackground(new java.awt.Color(153, 153, 255));
+        truckCheckbox.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
+        truckCheckbox.setText("Truck");
 
         javax.swing.GroupLayout jenisProdukInputPanel1Layout = new javax.swing.GroupLayout(jenisProdukInputPanel1);
         jenisProdukInputPanel1.setLayout(jenisProdukInputPanel1Layout);
@@ -650,12 +689,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jenisProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
-                        .addComponent(jenisProdukInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
-                        .addComponent(jenisProdukInputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(truckCheckbox)
+                            .addComponent(motorCheckbox)
+                            .addComponent(mobilCheckbox))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(cashCheckbox)
@@ -671,13 +712,16 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jenisProdukInputPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
-                        .addComponent(jenisProdukInputButton, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addGap(16, 16, 16))
-                    .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
                         .addComponent(cashCheckbox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(kreditCheckbox)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(kreditCheckbox))
+                    .addGroup(jenisProdukInputPanel1Layout.createSequentialGroup()
+                        .addComponent(mobilCheckbox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(motorCheckbox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(truckCheckbox)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ProdukFormPanelLayout = new javax.swing.GroupLayout(ProdukFormPanel);
@@ -770,7 +814,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         });
         minumanScrollPane1.setViewportView(tabelPembelianKendaraan);
 
-        kendaraanFormPanel3.setBackground(new java.awt.Color(255, 221, 186));
+        kendaraanFormPanel3.setBackground(new java.awt.Color(153, 153, 255));
 
         simpanTransaksiProdukButton.setBackground(new java.awt.Color(51, 151, 56));
         simpanTransaksiProdukButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
@@ -815,12 +859,30 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         totalProdukInputTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
 
         totalProdukInputLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        totalProdukInputLabel1.setForeground(new java.awt.Color(137, 92, 3));
+        totalProdukInputLabel1.setForeground(new java.awt.Color(255, 255, 255));
         totalProdukInputLabel1.setText("Total");
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(137, 92, 3));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tanggal");
+
+        tabelTruck.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabelTruck.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTruckMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelTruck);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -830,9 +892,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(minumanScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(makananScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(minumanScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(ProdukFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -840,21 +904,21 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(jLabel1))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
                                     .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(54, 54, 54)
-                                        .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(mainPanelLayout.createSequentialGroup()
-                                        .addGap(76, 76, 76)
+                                        .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(53, 53, 53)
                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(totalProdukInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                                .addGap(76, 76, 76)
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(totalProdukInputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(totalProdukInputTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
+                .addContainerGap(38, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(searchProdukInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -865,8 +929,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(searchProdukInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ProdukFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(ProdukFormPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(minumanScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -879,11 +945,11 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                             .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(kendaraanFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(83, 83, 83)))
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(makananScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                    .addComponent(minumanScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(minumanScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
 
@@ -899,7 +965,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -961,17 +1027,19 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
                 return;
             }
             
+
+            
             switch (action) {
                 case "add":
                     if(cashCheckbox.isSelected()){
                         pesanan = new PembelianKendaraan(idPembelianKendaraanInputTextField.getText(),
-                                namaPelangganInputTextField.getText(), namaProdukInputTextField.getText(), jenisProdukInputButton.getText(),idProdukInputTextField.getText(),
+                                specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(), getSpecialAtributeLabel(),idProdukInputTextField.getText(),
                                 Integer.parseInt(jumlahProdukInputTextfield.getText()),specialAtributeInputTextfield.getText(),cashCheckbox.getText(),
                                 (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                         );
                     }else{
                         pesanan = new PembelianKendaraan(idPembelianKendaraanInputTextField.getText(),
-                                namaPelangganInputTextField.getText(), namaProdukInputTextField.getText(), jenisProdukInputButton.getText(),idProdukInputTextField.getText(),
+                                specialAtributeInputTextfield.getText(), namaProdukInputTextField.getText(), getSpecialAtributeLabel(),idProdukInputTextField.getText(),
                                 Integer.parseInt(jumlahProdukInputTextfield.getText()),specialAtributeInputTextfield.getText(),kreditCheckbox.getText(),
                                 (Float.parseFloat(hargaProdukInputTextfield.getText()) * Integer.parseInt(jumlahProdukInputTextfield.getText()))
                         );
@@ -1012,7 +1080,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_simpanProdukButtonActionPerformed
 
     private void tabelMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMobilMouseClicked
-        tabelMotor.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        tabelMotor.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN 
+        tabelTruck.clearSelection();
         if(tabelMobil.isEnabled()){
             action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
         }
@@ -1033,8 +1102,8 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // DIPAKAI UNTUK SET DATA DARI TABEL
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        specialAtributeInputLabel.setText("Catatan");
-        jenisProdukInputButton.setText("Mobil");
+        specialAtributeInputLabel.setText("Jenis Mesin");
+         mobilCheckbox.setSelected(true);
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
     }//GEN-LAST:event_tabelMobilMouseClicked
@@ -1058,6 +1127,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
 
     private void tabelMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMotorMouseClicked
         tabelMobil.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        tabelTruck.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
         if(tabelMotor.isEnabled()){
             action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
         }
@@ -1078,10 +1148,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         // DIPAKAI UNTUK SET DATA DARI TABEL
         idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
         namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
-        specialAtributeInputLabel.setText("Ukuran");
+        specialAtributeInputLabel.setText("Jumlah Tak");
         specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
         hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
-        jenisProdukInputButton.setText("Motor");
+        motorCheckbox.setSelected(true);
         cancelButton.setEnabled(true);
     }//GEN-LAST:event_tabelMotorMouseClicked
 
@@ -1098,8 +1168,10 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private void tabelPembelianKendaraanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPembelianKendaraanMouseClicked
         tabelMobil.setEnabled(false); // GAK BOLEH DI AKSES SAAT UPDATE KERANJANG
         tabelMotor.setEnabled(false); // GAK BOLEH DI AKSES SAAT UPDATE KERANJANG
+        tabelTruck.setEnabled(false); // GAK BOLEH DI AKSES SAAT UPDATE KERANJANG
         tabelMobil.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
         tabelMotor.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        tabelTruck.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
         
         action = "update"; // UNTUK UPDATE PESANAN
 
@@ -1131,7 +1203,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         if (pesananList.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "DATA TIDAK BOLEH KOSONG!!!");
             return;
-        } else if (namaPelangganInputTextField.getText().isEmpty()) {
+        } else if (specialAtrributeTextField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Nama Pelanggan tidak boleh kosong!!!");
             return;
         } else if (jDateChooser.getDate() == null) {
@@ -1158,7 +1230,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         String formattedDate = outputFormat.format(date);
 
         // DIPAKAI UNTUK MEMBUAT OBJEK
-        pelanggan = new Customer(pelangganControl.generateId(), namaPelangganInputTextField.getText(), "-", "-");
+        pelanggan = new Customer(pelangganControl.generateId(),specialAtrributeTextField.getText() , "-", "-");
         transaksi = new Transaksi(idPembelianKendaraanInputTextField.getText(), karyawan.getId_karyawan(),
                 pelangganControl.generateId(), formattedDate, 0);
         
@@ -1170,7 +1242,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         tc.createReceipt(transaksi.getId_pembelian());
         // UNTUK MEMBERSIHKAN FIELD
         clearTextData();
-        namaPelangganInputTextField.setText("");
+        
         jDateChooser.setDate(null);
         pesananList.removeAll(pesananList); 
         
@@ -1202,18 +1274,40 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
         simpanTransaksiProdukButton.setEnabled(false);
     }//GEN-LAST:event_barukanProdukButtonActionPerformed
 
-    private void jenisProdukInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisProdukInputButtonActionPerformed
+    private void mobilCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilCheckboxActionPerformed
+
+    }//GEN-LAST:event_mobilCheckboxActionPerformed
+
+    private void tabelTruckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTruckMouseClicked
         // TODO add your handling code here:
-        switch (jenisProdukInputButton.getText()) {
-            case "Mobil":
-            jenisProdukInputButton.setText("Motor");
-            break;
-            case "Motor":
-            jenisProdukInputButton.setText("Mobil");
-            break;
+        tabelMobil.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        tabelMotor.clearSelection(); // DIPAKAI MENGHAPUS PILIHAN DI TABEL LAIN
+        if(tabelTruck.isEnabled()){
+            action = "add"; // AKSI ADD SUPAYA LANGSUNG MENAMBAH KERANJANG KALAU MAU
         }
-        setSpecialAtributeLabel();
-    }//GEN-LAST:event_jenisProdukInputButtonActionPerformed
+        // MENGESET AKSES SAAT KLIK TABEL MAKANAN
+        setComponentsData(true); // BOLEH EDIT JUMLAH
+        setEditDeleteButton(false); // TIDAK BISA EDIT / DELETE
+        cancelButton.setEnabled(true); // BOLEH CANCEL
+        simpanProdukButton.setEnabled(true); // BOLEH SIMPAN PRODUK
+        simpanTransaksiProdukButton.setEnabled(false); // TIDAK BISA SIMPAN TRANSAKSI
+        
+        // DIPAKAI UNTUK MEMILIH SECTION TABEL
+        int clickedRow = tabelTruck.getSelectedRow();
+        if (tabelTruck.getRowSorter() != null) {
+            clickedRow = tabelTruck.convertRowIndexToModel(clickedRow);
+        }
+        // DIPAKAI UNTUK MENGAMBIL DATA TABEL
+        TableModel tableModel = tabelTruck.getModel();
+        // DIPAKAI UNTUK SET DATA DARI TABEL
+        idProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaProdukInputTextField.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        specialAtributeInputLabel.setText("Jenis Roda");
+        specialAtributeInputTextfield.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        hargaProdukInputTextfield.setText(tableModel.getValueAt(clickedRow, 4).toString().replace("Rp ", ""));
+        truckCheckbox.setSelected(true);
+        cancelButton.setEnabled(true);
+    }//GEN-LAST:event_tabelTruckMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ProdukButtonPanel;
@@ -1239,7 +1333,7 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JButton jenisProdukInputButton;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jenisProdukInputLabel;
     private javax.swing.JPanel jenisProdukInputPanel;
     private javax.swing.JPanel jenisProdukInputPanel1;
@@ -1250,8 +1344,9 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane makananScrollPane;
     private javax.swing.JScrollPane minumanScrollPane;
     private javax.swing.JScrollPane minumanScrollPane1;
+    private javax.swing.JCheckBox mobilCheckbox;
+    private javax.swing.JCheckBox motorCheckbox;
     private javax.swing.JTextField namaKaryawanInputTextField;
-    private javax.swing.JTextField namaPelangganInputTextField;
     private javax.swing.JLabel namaProdukInputLabel;
     private javax.swing.JPanel namaProdukInputPanel;
     private javax.swing.JTextField namaProdukInputTextField;
@@ -1264,11 +1359,14 @@ public class TransaksiMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel specialAtributeInputLabel;
     private javax.swing.JPanel specialAtributeInputPanel;
     private javax.swing.JTextField specialAtributeInputTextfield;
+    private javax.swing.JTextField specialAtrributeTextField;
     private javax.swing.JTable tabelMobil;
     private javax.swing.JTable tabelMotor;
     private javax.swing.JTable tabelPembelianKendaraan;
+    private javax.swing.JTable tabelTruck;
     private javax.swing.JLabel totalProdukInputLabel;
     private javax.swing.JLabel totalProdukInputLabel1;
     private javax.swing.JTextField totalProdukInputTextfield;
+    private javax.swing.JCheckBox truckCheckbox;
     // End of variables declaration//GEN-END:variables
 }

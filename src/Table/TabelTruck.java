@@ -51,11 +51,11 @@ public class TabelTruck extends AbstractTableModel{
     public String getColumnName(int column){
         switch(column){
             case 0:
-                return "ID Menu";
+                return "ID Kendaraan";
             case 1:
-                return "Nama Menu";
+                return "Nama Kendaraan";
             case 2:
-                return "Jenis Menu";
+                return "Jenis Kendaraan";
             case 3:
                 return "jenis_Roda";
             case 4:
